@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
         .subscribe({
           next: (v) => {
             console.log(v);
-            this.msg = JSON.parse(JSON.stringify(v)).firstName; 
+            this.msg = JSON.parse(JSON.stringify(v)).firstName + ' has been added!'; 
             this.status = 'success';
             this.show = true;
             // this.passMsg.emit({msg: JSON.parse(JSON.stringify(v)).firstName, status: "success", show: true})

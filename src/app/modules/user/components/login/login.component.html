@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="toast-bar position-absolute">
+    <app-toast-bar  [msg]="msg" [status]="status" [show]="show"></app-toast-bar>
+</div>  
+<div class="userForm w-50 mx-auto">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+            <div>
+                <legend class="text-center text-primary">Login</legend>
+                <p class="text-center">
+                New User? <a href="/users/new">SignUp Here</a>
+                </p>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.username" pattern="[^@]+@[^@]+" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" [(ngModel)]="model.password" required>
+            </div>
+            <button type="submit" class="btn btn-primary form-control" [disabled]="!loginForm.valid">Submit</button>
+            
+        </fieldset>
+    </form>
+</div>
