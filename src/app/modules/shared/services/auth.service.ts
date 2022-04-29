@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '../../user/models/login.model';
 import * as moment from "moment";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import * as moment from "moment";
 export class AuthService {
 
   url: string = "http://localhost:8080/api/v1/users"
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private router: Router) { 
 
   }
 
@@ -27,6 +28,7 @@ export class AuthService {
   logOut(){
     localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
+    this.router.navigate(['/']);
   }
 
   isLoggedIn(){
@@ -39,5 +41,38 @@ export class AuthService {
       return moment();
     const expiresAt = JSON.parse(expiration );
     return moment(expiresAt);
+  }
+
+  private getPayLoad(){
+    const token = localStorage.getItem('token');
+    if(token){
+      const jwt = token.split(" ");
+      if(jwt && jwt.length == 2 && jwt[1] != undefined){
+        return jwt[1].split(".")[1];
+      }
+
+    }
+    return undefined;
+  }
+
+  private getRole(){
+    const payLoad = this.getPayLoad();
+    if(payLoad)
+      return JSON.parse(atob(payLoad)).role;
+    else
+      return undefined;
+  }
+
+  isOperator(){
+    return this.getRole() === 'ROLE_OPERATOR';
+  }
+
+  isAdmin(){
+    return this.getRole() === 'ROLE_ADMIN';
+  }
+
+  isOperatorOrAdmin(){
+    const role = this.getRole();
+    return role === 'ROLE_OPERATOR' || role === 'ROLE_ADMIN';
   }
 }

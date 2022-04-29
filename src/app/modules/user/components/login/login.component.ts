@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         complete: () => {
           this.loading = false;
           console.log("Done")
-          this.route.navigate(['/'])
+          this.route.navigate(['/']);
           this.loginForm.reset();
         }
       })
