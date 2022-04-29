@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MsgCommunicationService } from '../../services/msg-communication.service';
 
 @Component({
   selector: 'app-toast-bar',
@@ -7,15 +8,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ToastBarComponent implements OnInit {
 
-  @Input('show') show!: boolean;
-  @Input('msg') msg!: string;
-  @Input('status') status!: string;
+  show: boolean = false;
+  msg!: string;
+  status!: string;
 
   // @Output() passMsg = new EventEmitter();
-  constructor() { }
+  constructor(private msgCommunicationService: MsgCommunicationService) { 
+  }
 
   ngOnInit(): void {
-
+    this.msgCommunicationService.msgEvent.subscribe(toastBarMsg => {
+      this.show = toastBarMsg.show;
+      this.msg = toastBarMsg.msg;
+      this.status = toastBarMsg.status;
+    })
   }
 
   closeToastBar(){

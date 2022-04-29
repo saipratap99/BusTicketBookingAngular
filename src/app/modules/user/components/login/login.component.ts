@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
+import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { Login } from '../../models/login.model';
 
 @Component({
@@ -14,13 +15,13 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm: any;
   model: Login = new Login();
 
-  // toastBar Attributes
-  msg!: string;
-  status!: string;
-  show!: boolean ;
+  // // toastBar Attributes
+  // msg!: string;
+  // status!: string;
+  // show!: boolean ;
   loading: boolean = false;
 
-  constructor(private authService: AuthService, private route: Router) { }
+  constructor(private authService: AuthService, private route: Router, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
   }
@@ -32,28 +33,21 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (v) => {
           const jwt  = v.headers.get('Authorization');
-          this.msg = "Welcome Back!"; 
-          this.status = 'success';
-          this.show = true;
-          // this.passMsg.emit({msg: JSON.parse(JSON.stringify(v)).firstName, status: "success", show: true})
-          
+          this.msgCommunicationService.msgEvent.emit({msg: "Welcome back user!", status: "success", show: true})
           if(jwt)
             this.authService.setSession(jwt);
         },
 
         error: (err) => {
           console.log(err);
-          this.msg = JSON.parse(JSON.stringify(err)).error; 
-          this.status = 'danger';
-          this.show = true;
+          this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(err)).error, status: "danger", show: true});
           this.loading = false;
-          // this.passMsg.emit({msg: "Error creating", status: "danger", show: true});
         },
 
         complete: () => {
           this.loading = false;
           console.log("Done")
-          this.route.navigate(['/']);
+          // this.route.navigate(['/']);
           this.loginForm.reset();
         }
       })
