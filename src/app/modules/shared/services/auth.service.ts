@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   url: string = "http://localhost:8080/api/v1/users"
+  private payLoad: any = undefined;
   constructor(private http: HttpClient, private router: Router) { 
 
   }
@@ -28,6 +29,7 @@ export class AuthService {
   logOut(){
     localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
+    this.payLoad = undefined;
     this.router.navigate(['/']);
   }
 
@@ -39,7 +41,7 @@ export class AuthService {
     const expiration = localStorage.getItem("expires_at");
     if(expiration == null)
       return moment();
-    const expiresAt = JSON.parse(expiration );
+    const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
 
@@ -56,10 +58,14 @@ export class AuthService {
   }
 
   private getRole(){
+    if(this.payLoad)
+      return this.payLoad.role;
+    // console.log("getRole");
     const payLoad = this.getPayLoad();
-    if(payLoad)
-      return JSON.parse(atob(payLoad)).role;
-    else
+    if(payLoad){
+      this.payLoad = JSON.parse(atob(payLoad));
+      return this.payLoad.role;
+    }else
       return undefined;
   }
 
