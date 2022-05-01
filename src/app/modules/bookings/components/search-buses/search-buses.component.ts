@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, pipe} from 'rxjs';
 import { switchMap , filter} from 'rxjs/operators';
 import { BookingService } from '../../services/booking.service';
+import { Location } from '../../models/location.model';
 
 @Component({
   selector: 'app-search-buses',
@@ -13,12 +15,15 @@ export class SearchBusesComponent implements OnInit {
 
   form!: FormGroup 
 
-  departureLocations: any; 
-  arrivalLocations: any;
+  @Input() selectedDepartureLocation!: Location
+  @Input() selectedArrivalLocation!: Location
+  @Input() selectedDate!: string | null
 
-  date!: string
+  departureLocations!: any[]; 
+  arrivalLocations!: any[];
+  date!: string | null
 
-  constructor(private bookingService: BookingService) { }
+  constructor(private bookingService: BookingService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -27,6 +32,17 @@ export class SearchBusesComponent implements OnInit {
       date: new FormControl("")
     })
     this.searchLocation();
+
+    if(this.selectedArrivalLocation){
+      this.form.get('departureLocation')?.setValue(this.selectedDepartureLocation.locationName);
+      this.form.get('arrivalLocation')?.setValue(this.selectedArrivalLocation.locationName);
+      this.form.get('date')?.setValue(this.selectedDate)
+
+      this.arrivalLocations?.push(this.selectedArrivalLocation);
+      this.departureLocations?.push(this.selectedDepartureLocation);
+      this.date = this.selectedDate
+
+    }
   }
 
   searchLocation() {
@@ -58,4 +74,13 @@ export class SearchBusesComponent implements OnInit {
         console.log(this.arrivalLocations)
       })
   }
+
+  getBuses(){
+    if(this.arrivalLocations.length == 1 && this.departureLocations.length == 1 && this.form.valid){
+      this.date = this.form.get('date')?.value;
+      this.router.navigate([`bookings/search/${this.departureLocations[0].locationName}/${this.departureLocations[0].id}/${this.arrivalLocations[0].locationName}/${this.arrivalLocations[0].id}/${this.date}`])
+    }
+  }
 }
+
+

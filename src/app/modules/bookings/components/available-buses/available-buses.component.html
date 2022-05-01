@@ -1,0 +1,24 @@
+<app-search-buses [selectedDepartureLocation]="departureLocation" [selectedArrivalLocation]="arrivalLocation" [selectedDate]="date"></app-search-buses>
+<div *ngIf="availableBuses.length > 0" class="my-4">
+    <h4 class="text-primary">Available Buses from {{departureLocation.locationName}} to {{arrivalLocation.locationName}} on {{date}}: </h4>
+    <div class="bus mt-2 p-3 border border-secondary" *ngFor="let bus of availableBuses">
+        <h5><strong>{{bus.busDetails.busName}}</strong></h5>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="col">
+                <strong>Departure time</strong>: {{ bus.departureTime }}
+            </div>			
+            <div class="col">
+                <strong>Duaration</strong>: {{ bus.duration }} minutes
+            </div>					
+            <div class="col">
+                <strong> Price: </strong> {{ bus.basePrice | currency: 'INR'}}
+            </div>
+            <div class="col">
+                <a class="btn btn-primary">Select Seats</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="availableBuses.length == 0">
+    <h3>No buses available on this route on this date.</h3>
+</div>

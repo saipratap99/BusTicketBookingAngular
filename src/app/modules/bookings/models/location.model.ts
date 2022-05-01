@@ -1,4 +1,4 @@
-interface Location{
-    id: number,
-    locationName: string
+export interface Location{
+    id: string | null,
+    locationName: string | null
 }
