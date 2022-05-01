@@ -11,6 +11,7 @@ export class AuthService {
 
   url: string = "http://localhost:8080/api/v1/users"
   private payLoad: any = undefined;
+  
   constructor(private http: HttpClient, private router: Router) { 
 
   }
@@ -36,7 +37,7 @@ export class AuthService {
   isLoggedIn(){
     return moment().isBefore(this.getExpiration());
   }
-
+  
   getExpiration(){
     const expiration = localStorage.getItem("expires_at");
     if(expiration == null)
