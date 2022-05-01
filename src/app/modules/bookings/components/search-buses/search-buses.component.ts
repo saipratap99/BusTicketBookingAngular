@@ -78,6 +78,7 @@ export class SearchBusesComponent implements OnInit {
   getBuses(){
     if(this.arrivalLocations.length == 1 && this.departureLocations.length == 1 && this.form.valid){
       this.date = this.form.get('date')?.value;
+      this.router
       this.router.navigate([`bookings/search/${this.departureLocations[0].locationName}/${this.departureLocations[0].id}/${this.arrivalLocations[0].locationName}/${this.arrivalLocations[0].id}/${this.date}`])
     }
   }

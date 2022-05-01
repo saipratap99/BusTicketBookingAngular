@@ -21,9 +21,11 @@ export class AvailableBusesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.setDetails();
-    this.fetchBuses();
-
+    this.route.params.subscribe(params => {
+      this.setDetails();
+      this.fetchBuses();
+    })
+    
   }
 
   setDetails(){
