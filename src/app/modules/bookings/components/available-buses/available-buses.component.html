@@ -1,6 +1,6 @@
 <app-search-buses [selectedDepartureLocation]="departureLocation" [selectedArrivalLocation]="arrivalLocation" [selectedDate]="date"></app-search-buses>
 <div *ngIf="availableBuses.length > 0" class="my-4">
-    <h4 class="text-primary">Available Buses from {{departureLocation.locationName}} to {{arrivalLocation.locationName}} on {{date}}: </h4>
+    <h4 class="text-primary text-center">Available Buses from {{departureLocation.locationName}} to {{arrivalLocation.locationName}} on {{date}}: </h4>
     <div class="bus mt-2 p-3 border border-secondary" *ngFor="let bus of availableBuses">
         <h5><strong>{{bus.busDetails.busName}}</strong></h5>
         <div class="d-flex justify-content-between align-items-center">
@@ -19,6 +19,6 @@
         </div>
     </div>
 </div>
-<div *ngIf="availableBuses.length == 0" class="my-4">
+<div *ngIf="availableBuses.length == 0" class="my-4 text-center">
     <h3>No buses available on this route on this date.</h3>
 </div>

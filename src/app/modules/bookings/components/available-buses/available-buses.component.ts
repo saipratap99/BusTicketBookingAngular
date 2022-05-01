@@ -33,11 +33,11 @@ export class AvailableBusesComponent implements OnInit {
     this.departureLocation = {id: paramMap.get('depId'), locationName: paramMap.get('depLocation')}
     this.arrivalLocation = {id: paramMap.get('arrId'), locationName: paramMap.get('arrLocation')}
     this.date = paramMap.get('date')
-    console.log(this.departureLocation)
+    // console.log(this.departureLocation)
   }
 
   fetchBuses(){
     this.bookingService.getBuses(this.departureLocation, this.arrivalLocation, this.date)
-      .subscribe(response => {this.availableBuses = response; console.log(this.availableBuses)});
+      .subscribe(response => {this.availableBuses = response;});
   }
 }
