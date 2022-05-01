@@ -1,0 +1,25 @@
+<div class="bookingForm w-80 mx-auto mt-3">
+	<form class="row gy-2 gx-3 align-items-center justify-content-center" [formGroup]="form">
+		  <div class="col-auto">
+		    <label class="visually-hidden" for="autoSizingInput">Departure location</label>
+		    <input list="locations" class="form-control" id="autoSizingInput" name="depLocation" placeholder="Search Departure location" formControlName="departureLocation" required>
+		  </div>
+		  <div class="col-auto">
+		    <label class="visually-hidden" for="autoSizingInput">Arrival location</label>
+		    <input list="locations" class="form-control" id="autoSizingInput" name="arrLocation" placeholder="Search Arrival location" formControlName="arrivalLocation" required>
+			<datalist id="locations" *ngIf="departureLocations">
+				<option [value]="departureLocation.locationName" *ngFor="let departureLocation of departureLocations">
+			</datalist>
+		  </div>
+		  <div class="col-auto">
+		    <label class="visually-hidden" for="autoSizingInputGroup">Choose date</label>
+		    <input type="date" class="form-control" id="autoSizingInputGroup" name="date" formControlName="date" required>
+			<datalist id="locations" *ngIf="arrivalLocations">
+				<option [value]="arrivalLocation.locationName" *ngFor="let arrivalLocation of arrivalLocations">
+			</datalist>
+		  </div>
+		  <div class="col-auto">
+		    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Search</button>
+		  </div>
+		</form>
+</div>
