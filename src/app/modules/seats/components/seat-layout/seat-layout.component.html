@@ -1,0 +1,18 @@
+<h3>Select Seats</h3>
+<div class="seat-layout" *ngIf="seats">
+    <div *ngFor="let row of rows" class="d-flex">
+        <div *ngFor="let col of cols">
+            <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
+
+                <div *ngIf="seat.seatCol != undefined; else noSeat" class="seat">
+                    {{seat.seatName }}  
+                </div>
+                
+                <ng-template #noSeat>
+                    <div class="seat no-seat"> </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>

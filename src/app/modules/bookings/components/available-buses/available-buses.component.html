@@ -1,6 +1,6 @@
 <app-search-buses [selectedDepartureLocation]="departureLocation" [selectedArrivalLocation]="arrivalLocation" [selectedDate]="date"></app-search-buses>
 <div *ngIf="availableBuses.length > 0" class="my-4">
-    <h4 class="text-primary text-center">Available Buses from {{departureLocation.locationName}} to {{arrivalLocation.locationName}} on {{date}}: </h4>
+    <h4 class="text-primary text-center">Available Buses from {{departureLocation.locationName}} to {{arrivalLocation.locationName}} on {{date | date: 'fullDate'}}: </h4>
     <div class="bus mt-2 p-3 border border-secondary" *ngFor="let bus of availableBuses">
         <h5><strong>{{bus.busDetails.busName}}</strong></h5>
         <div class="d-flex justify-content-between align-items-center">
@@ -14,7 +14,7 @@
                 <strong> Price: </strong> {{ bus.basePrice | currency: 'INR'}}
             </div>
             <div class="col">
-                <a class="btn btn-primary">Select Seats</a>
+                <button class="btn btn-primary" (click)="getSeatLayout(bus.id, bus.busDetails.id, bus.departureTime)">Select Seats</button>
             </div>
         </div>
     </div>

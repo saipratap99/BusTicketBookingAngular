@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '../../models/location.model';
 import { BookingService } from '../../services/booking.service';
 
@@ -17,7 +17,7 @@ export class AvailableBusesComponent implements OnInit {
 
   availableBuses: any[] = []
 
-  constructor(private route: ActivatedRoute, private bookingService: BookingService) { }
+  constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -39,5 +39,9 @@ export class AvailableBusesComponent implements OnInit {
   fetchBuses(){
     this.bookingService.getBuses(this.departureLocation, this.arrivalLocation, this.date)
       .subscribe(response => {this.availableBuses = response;});
+  }
+
+  getSeatLayout(scheduleId: any, busId: any, departureTime: any){
+    this.router.navigate([`/seats/schedule/${scheduleId}/bus/${busId}/${this.date}/${departureTime}`])
   }
 }

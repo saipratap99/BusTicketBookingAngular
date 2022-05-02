@@ -28,13 +28,19 @@ export class AuthService {
   }
 
   logOut(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
-    this.payLoad = undefined;
-    this.router.navigate(['/']);
+    if(confirm("Are you sure to logout?")){
+      localStorage.removeItem('token');
+      localStorage.removeItem('expires_at');
+      this.payLoad = undefined;
+      this.router.navigate(['/']);
+    }
   }
 
   isLoggedIn(){
+    if(!moment().isBefore(this.getExpiration())){
+      localStorage.clear()
+      this.payLoad = undefined;
+    }
     return moment().isBefore(this.getExpiration());
   }
   
@@ -71,15 +77,15 @@ export class AuthService {
   }
 
   isOperator(){
-    return this.getRole() === 'ROLE_OPERATOR';
+    return this.getRole() === 'ROLE_OPERATOR' && this.isLoggedIn();
   }
 
   isAdmin(){
-    return this.getRole() === 'ROLE_ADMIN';
+    return this.getRole() === 'ROLE_ADMIN' && this.isLoggedIn();
   }
 
   isOperatorOrAdmin(){
     const role = this.getRole();
-    return role === 'ROLE_OPERATOR' || role === 'ROLE_ADMIN';
+    return role === ('ROLE_OPERATOR' || role === 'ROLE_ADMIN') && this.isLoggedIn();
   }
 }
