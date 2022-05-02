@@ -19,5 +19,10 @@
                             
     </section>
 
-    <button class="btn btn-primary mt-3" (click)="onProceed()">Proceed</button>
+    <button class="btn btn-primary mt-3" (click)="onProceed()" [disabled]="loading">
+        <span *ngIf="loading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </span>
+        {{ loading ? 'Booking..' : 'Proceed'}}
+    </button>
 </div>

@@ -16,6 +16,7 @@ export class SeatLayoutComponent implements OnInit {
   maxCols: number = 0;
   rows: number[] = [];
   cols: number[] = []; 
+  loading: boolean = false;
 
   constructor(private route: ActivatedRoute, private seatService: SeatsService, private router: Router) { }
 
@@ -76,6 +77,7 @@ export class SeatLayoutComponent implements OnInit {
   }
 
   onProceed(){
+    this.loading = true;
     const paramMap = this.route.snapshot.paramMap;
     let model: any = {
       "scheduleId": paramMap.get('scheduleId'),
@@ -92,12 +94,12 @@ export class SeatLayoutComponent implements OnInit {
         next: (data) => {
           this.router.navigate([`/bookings/confirm/${data.bookingId}`])
           console.log(data.bookingId)
+          this.loading = false;
         },
-        error: (err) => {console.log(err)},
+        error: (err) => {console.log(err); this.loading = false;},
         complete: () => {}
       })
 
-    
   }
 
 

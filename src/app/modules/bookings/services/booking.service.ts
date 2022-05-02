@@ -17,4 +17,8 @@ export class BookingService {
   getBuses(departureLocation: Location, arrivalLocation: Location, date: string | null){
     return this.http.get<any[]>(`${this.url}/search/buses/${departureLocation.locationName}/${departureLocation.id}/${arrivalLocation.locationName}/${arrivalLocation.id}/${date}`);
   }
+
+  getBookingDetails(bookingId: number){
+    return this.http.get(`${this.url}/booking/confirm/${bookingId}`);
+  }
 }
