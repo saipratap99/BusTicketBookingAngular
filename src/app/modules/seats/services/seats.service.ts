@@ -14,6 +14,6 @@ export class SeatsService {
   }
 
   bookSelectedSeats(model: any){
-    return this.http.post(`${this.url}/booking/new`, model);
+    return this.http.post<any>(`${this.url}/booking/new`, model);
   }
 }

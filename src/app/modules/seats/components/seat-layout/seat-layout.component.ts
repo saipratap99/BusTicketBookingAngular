@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SeatsService } from '../../services/seats.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class SeatLayoutComponent implements OnInit {
   rows: number[] = [];
   cols: number[] = []; 
 
-  constructor(private route: ActivatedRoute, private seatService: SeatsService) { }
+  constructor(private route: ActivatedRoute, private seatService: SeatsService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -88,8 +88,11 @@ export class SeatLayoutComponent implements OnInit {
     console.log(model);
 
     this.seatService.bookSelectedSeats(model)
-      .subscribe({
-        next: (data) => console.log(data),
+      .subscribe({  
+        next: (data) => {
+          this.router.navigate([`/bookings/confirm/${data.bookingId}`])
+          console.log(data.bookingId)
+        },
         error: (err) => {console.log(err)},
         complete: () => {}
       })
