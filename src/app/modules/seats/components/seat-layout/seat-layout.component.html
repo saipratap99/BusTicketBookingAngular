@@ -1,18 +1,23 @@
 <h3>Select Seats</h3>
 <div class="seat-layout" *ngIf="seats">
-    <div *ngFor="let row of rows" class="d-flex">
-        <div *ngFor="let col of cols">
-            <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
+    <section id="seats">
 
-                <div *ngIf="seat.seatCol != undefined; else noSeat" class="seat">
-                    {{seat.seatName }}  
+        <div *ngFor="let row of rows" class="d-flex">
+            <div *ngFor="let col of cols">
+                <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
+                    <div *ngIf="seat.seatCol != undefined; else noSeat">
+                        <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked)" #checkbox [disabled]="seat.booked"/>  
+                        <label class="seat" [for]="seat.seatName" [class.booked]="seat.booked">{{seat.seatName}}</label>
+                    </div> 
+                    <ng-template #noSeat>
+                        <div class="seat no-seat"> </div>
+                    </ng-template>
+
                 </div>
-                
-                <ng-template #noSeat>
-                    <div class="seat no-seat"> </div>
-                </ng-template>
-
             </div>
         </div>
-    </div>
+                            
+    </section>
+
+    <button class="btn btn-primary mt-3" (click)="onProceed()">Proceed</button>
 </div>

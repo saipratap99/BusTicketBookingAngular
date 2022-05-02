@@ -12,4 +12,8 @@ export class SeatsService {
   getAvailableSeats(scheduleId: number, busId: number, doj: any, time: any){
     return this.http.get<any[]>(`${this.url}/seats/schedule/${scheduleId}/bus/${busId}/${doj}/${time}`)
   }
+
+  bookSelectedSeats(model: any){
+    return this.http.post(`${this.url}/booking/new`, model);
+  }
 }

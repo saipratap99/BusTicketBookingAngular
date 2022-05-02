@@ -10,6 +10,7 @@ import { SeatsService } from '../../services/seats.service';
 export class SeatLayoutComponent implements OnInit {
 
   seats: any[] = [];
+  seatsSelected: number[] = [];
   seatsByRow: any;
   maxRows: number = 0;
   maxCols: number = 0;
@@ -64,4 +65,38 @@ export class SeatLayoutComponent implements OnInit {
     console.log(this.seatsByRow, this.maxRows, this.maxCols);
   }
 
+  onChange(seatId: any, isChecked: boolean ){
+    if(isChecked)
+      this.seatsSelected.push(seatId);
+    else{
+      let index = this.seatsSelected.indexOf(seatId);
+      if(index >= 0)
+        this.seatsSelected.splice(index, 1);
+    }
+  }
+
+  onProceed(){
+    const paramMap = this.route.snapshot.paramMap;
+    let model: any = {
+      "scheduleId": paramMap.get('scheduleId'),
+      "busId": paramMap.get('busId'),
+      "date": paramMap.get('date'),
+      "time": paramMap.get('time'),
+      "selectedSeats": this.seatsSelected
+    }
+
+    console.log(model);
+
+    this.seatService.bookSelectedSeats(model)
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (err) => {console.log(err)},
+        complete: () => {}
+      })
+
+    
+  }
+
+
 }
+

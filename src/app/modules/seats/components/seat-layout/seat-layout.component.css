@@ -7,6 +7,21 @@
     margin: 2px;
 }
 
+.booked{
+    background-color: gray;
+    color: white;
+}
+
+.seat-checkbox{
+    display: none;
+}
+
+.seat-checkbox:checked + .seat {
+    background-color: #F44336;
+    color: white;
+    border: none;
+}
+
 .no-seat{
     background-color: white;
     border: none;
