@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeatsService } from '../../services/seats.service';
+import { faCircleDot } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-seat-layout',
@@ -18,6 +19,8 @@ export class SeatLayoutComponent implements OnInit {
   cols: number[] = []; 
   loading: boolean = false;
 
+  steering: any = faCircleDot
+  
   constructor(private route: ActivatedRoute, private seatService: SeatsService, private router: Router) { }
 
   ngOnInit(): void {

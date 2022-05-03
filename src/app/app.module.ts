@@ -8,10 +8,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './modules/shared/shared.module';
 import { httpInterceptorProviders } from './interceptors';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

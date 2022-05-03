@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged, pipe} from 'rxjs';
 import { switchMap , filter} from 'rxjs/operators';
 import { BookingService } from '../../services/booking.service';
 import { Location } from '../../models/location.model';
+import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 
 @Component({
   selector: 'app-search-buses',
@@ -23,7 +24,7 @@ export class SearchBusesComponent implements OnInit {
   arrivalLocations!: any[];
   date!: string | null
 
-  constructor(private bookingService: BookingService, private router: Router) { }
+  constructor(private bookingService: BookingService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -55,9 +56,15 @@ export class SearchBusesComponent implements OnInit {
           return this.bookingService.getLocation(locationName);
         })
       )
-      .subscribe( locations => {
-        this.departureLocations = locations;
-        console.log(this.departureLocations)
+      .subscribe({
+        next: locations => {
+          this.departureLocations = locations;
+          console.log(this.departureLocations)
+        },
+        error: (err) => {
+          if(err.status == 0)
+            this.msgCommunicationService.msgEvent.emit({msg: "Unable to connect with Api", status: "danger", show: true});
+        }
       })
 
       this.form.get('arrivalLocation')?.valueChanges
@@ -69,9 +76,15 @@ export class SearchBusesComponent implements OnInit {
           return this.bookingService.getLocation(locationName);
         })
       )
-      .subscribe( locations => {
-        this.arrivalLocations = locations;
-        console.log(this.arrivalLocations)
+      .subscribe({
+        next: locations => {
+          this.arrivalLocations = locations;
+          console.log(this.arrivalLocations)
+        },
+        error: (err) => {
+          if(err.status == 0)
+            this.msgCommunicationService.msgEvent.emit({msg: "Unable to connect with Api", status: "danger", show: true});
+        }
       })
   }
 
@@ -80,7 +93,10 @@ export class SearchBusesComponent implements OnInit {
       this.date = this.form.get('date')?.value;
       this.router
       this.router.navigate([`bookings/search/${this.departureLocations[0].locationName}/${this.departureLocations[0].id}/${this.arrivalLocations[0].locationName}/${this.arrivalLocations[0].id}/${this.date}`])
-    }
+    }else if(this.departureLocations.length != 1)
+      this.msgCommunicationService.msgEvent.emit({msg: "Invalid departure location", status: "danger", show: true});
+    else if(this.arrivalLocations.length != 1)
+      this.msgCommunicationService.msgEvent.emit({msg: "Invalid arrival location", status: "danger", show: true});
   }
 }
 
