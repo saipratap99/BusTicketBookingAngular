@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeatsService } from '../../services/seats.service';
 import { faCircleDot } from '@fortawesome/free-solid-svg-icons';
+import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 
 @Component({
   selector: 'app-seat-layout',
@@ -21,7 +22,7 @@ export class SeatLayoutComponent implements OnInit {
 
   steering: any = faCircleDot
   
-  constructor(private route: ActivatedRoute, private seatService: SeatsService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private seatService: SeatsService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -39,9 +40,9 @@ export class SeatLayoutComponent implements OnInit {
           this.seperateSeatsByRows();
         },
         error: (err) => {
-          console.log(err.error);
-        },
-        complete: () => {}
+          this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true});
+          // this.router.navigate(['/']);
+        }
     })
 
   }

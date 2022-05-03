@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { BookingService } from '../../services/booking.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class ConfirmBookingComponent implements OnInit {
   bookingDetails: any = undefined;
   loading: boolean = false; 
 
-  constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params)=>{
@@ -29,8 +30,7 @@ export class ConfirmBookingComponent implements OnInit {
           this.bookingDetails = data;
           console.log(data)
         },
-        error: (err) => console.log(err),
-        complete: () => {}
+        error: (err) => this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true}),
       })
   }
 
@@ -40,8 +40,9 @@ export class ConfirmBookingComponent implements OnInit {
       next: (data) => {
         this.router.navigate(['bookings/success', this.id]);
       },
-      error: (err) => {},
-      complete: () => {}
+      error: (err) => {
+        this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true});
+      }
     });
   }
 
