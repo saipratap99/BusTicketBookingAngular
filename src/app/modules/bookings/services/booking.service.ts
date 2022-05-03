@@ -21,4 +21,8 @@ export class BookingService {
   getBookingDetails(bookingId: number){
     return this.http.get(`${this.url}/booking/confirm/${bookingId}`);
   }
+
+  confirmBooking(id: number){
+    return this.http.post(`${this.url}/booking/confirm/${id}`, {});
+  }
 }

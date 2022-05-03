@@ -6,13 +6,15 @@ import { SearchBusesComponent } from './components/search-buses/search-buses.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { AvailableBusesComponent } from './components/available-buses/available-buses.component';
 import { ConfirmBookingComponent } from './components/confirm-booking/confirm-booking.component';
+import { BookingSuccessComponent } from './components/booking-success/booking-success.component';
 
 
 @NgModule({
   declarations: [
     SearchBusesComponent,
     AvailableBusesComponent,
-    ConfirmBookingComponent
+    ConfirmBookingComponent,
+    BookingSuccessComponent
   ],
   imports: [
     CommonModule,

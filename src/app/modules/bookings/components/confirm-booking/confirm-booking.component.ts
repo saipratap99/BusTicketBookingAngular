@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookingService } from '../../services/booking.service';
 
 @Component({
@@ -10,8 +10,10 @@ import { BookingService } from '../../services/booking.service';
 export class ConfirmBookingComponent implements OnInit {
 
   id!: number; 
-  bookingDetails: any = undefined
-  constructor(private route: ActivatedRoute, private bookingService: BookingService) { }
+  bookingDetails: any = undefined;
+  loading: boolean = false; 
+
+  constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params)=>{
@@ -33,7 +35,14 @@ export class ConfirmBookingComponent implements OnInit {
   }
 
   confirmBooking(){
-    
+    this.loading = true;
+    this.bookingService.confirmBooking(this.id).subscribe({
+      next: (data) => {
+        this.router.navigate(['bookings/success', this.id]);
+      },
+      error: (err) => {},
+      complete: () => {}
+    });
   }
 
 }
