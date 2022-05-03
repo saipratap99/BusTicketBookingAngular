@@ -36,14 +36,8 @@ export class ConfirmBookingComponent implements OnInit {
 
   confirmBooking(){
     this.loading = true;
-    this.bookingService.confirmBooking(this.id).subscribe({
-      next: (data) => {
-        this.router.navigate(['bookings/success', this.id]);
-      },
-      error: (err) => {
-        this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true});
-      }
-    });
+    this.router.navigate(['bookings/success', this.id]);
+    this.loading = false;
   }
 
 }

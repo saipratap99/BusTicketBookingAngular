@@ -1,52 +1,6 @@
 <div class="mt-3">
     <h3 class="text-center text-primary">Confirm Booking</h3>
-    <div class="d-flex justify-content-around" *ngIf="bookingDetails">
-        <div class="trip-details">
-            <h4>Trip Details</h4>
-            <div>
-                <div class="mt-3">
-                    <span><strong>{{ bookingDetails.scheduleDetails.serviceDetails.departureLocation.locationName }}</strong></span>
-                    <!-- <i class="fa-solid fa-arrow-right-long"></i> -->
-                    <span> to </span>
-                    <span><strong>{{ bookingDetails.scheduleDetails.serviceDetails.arrivalLocation.locationName }} </strong></span>
-                </div>
-                <div class="mt-3">
-                    <span class="d-block">Departure Date: <strong> {{bookingDetails.doj | date: 'fullDate' }}</strong> </span> 
-                    <span class="d-block">Departure Time: <strong>{{bookingDetails.time}}</strong></span> 
-                    <span class="d-block"> Duration: <strong>{{bookingDetails.scheduleDetails?.duration}}</strong> minutes</span> 
-                </div>
-                <div class="mt-3">
-                    <span><strong>{{bookingDetails.busDetails.busName }}</strong></span> 
-                    <p>
-                        Seats Booked:
-                        <strong>{{ bookingDetails.seats?.join(', ')}}</strong>
-                    </p> 
-                </div>
-                
-            </div>
-        </div>
-        <div class="price-breakup">
-            <h4>Fare Breakup</h4>
-            <div>
-                <div class="d-flex">
-                    <div>Base price: </div>
-                    <div class="ms-auto">{{ bookingDetails.basePrice | currency: 'INR'}} </div>
-                </div>
-                <div class="d-flex">
-                    <div>GST:</div>
-                    <div class="ms-auto">+{{ bookingDetails.gst * bookingDetails.basePrice/ 100 | currency: 'INR'}}</div>
-                </div>
-                <div class="d-flex">
-                    <div>Discount: </div>
-                    <div class="ms-auto">-{{ bookingDetails.discount * bookingDetails.basePrice/ 100 | currency: 'INR'}}</div>
-                </div>
-            </div>
-            <div class="d-flex">
-                <div>Total:</div>
-                <div class="ms-auto"><strong>{{ bookingDetails.basePrice + (bookingDetails.gst * bookingDetails.basePrice/ 100) - (bookingDetails.discount * bookingDetails.basePrice/ 100) | currency: 'INR'}}</strong></div>
-            </div>
-        </div>
-    </div>
+    <app-booking-details-overview [bookingDetails]="bookingDetails"></app-booking-details-overview>
     <div class="mx-auto text-center">
         <button class="btn btn-primary" [disabled]="loading" (click)="confirmBooking()">
             <span *ngIf="loading">
