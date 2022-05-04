@@ -1,0 +1,13 @@
+.bus-name{
+    font-size: 20px;
+    width: 400px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 8px;
+    box-sizing: border-box;
+}
+
+#price{
+    width: 90%;
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '../../models/location.model';
 import { BookingService } from '../../services/booking.service';
+import { faSortAmountDesc, faSortAmountAsc, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-available-buses',
@@ -14,6 +15,10 @@ export class AvailableBusesComponent implements OnInit {
   departureLocation!: Location;
   arrivalLocation!: Location;
   date!: string | null;
+  ascIcon = faSortAmountAsc;
+  descIcon = faSortAmountDesc;
+  rightArrow = faArrowRight;
+
 
   availableBuses: any[] = []
 

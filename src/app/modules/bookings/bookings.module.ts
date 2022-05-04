@@ -9,6 +9,9 @@ import { ConfirmBookingComponent } from './components/confirm-booking/confirm-bo
 import { BookingSuccessComponent } from './components/booking-success/booking-success.component';
 import { BookingDetailsOverviewComponent } from './components/booking-details-overview/booking-details-overview.component';
 import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MinutesToHhMmPipe } from './pipes/minutes-to-hh-mm.pipe';
+import { AddMinutesToDatePipe } from './pipes/add-minutes-to-date.pipe';
 
 
 @NgModule({
@@ -18,12 +21,15 @@ import { BookingDetailsComponent } from './components/booking-details/booking-de
     ConfirmBookingComponent,
     BookingSuccessComponent,
     BookingDetailsOverviewComponent,
-    BookingDetailsComponent
+    BookingDetailsComponent,
+    MinutesToHhMmPipe,
+    AddMinutesToDatePipe
   ],
   imports: [
     CommonModule,
     BookingsRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ]
 })
 export class BookingsModule { }
