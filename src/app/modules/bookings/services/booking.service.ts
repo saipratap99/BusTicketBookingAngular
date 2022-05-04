@@ -25,4 +25,8 @@ export class BookingService {
   confirmBooking(id: number){
     return this.http.post(`${this.url}/booking/confirm/${id}`, {});
   }
+
+  getAllSuccessBookings(){
+    return this.http.get<any[]>(`${this.url}/booking/`);
+  }
 }

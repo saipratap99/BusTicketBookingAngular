@@ -1,0 +1,11 @@
+<h3 class="text-center text-primary">Bookings</h3>
+
+<div *ngIf="allSuccessbookingDetails.length > 0; else noBooking">
+    
+    <div class="d-flex justify-content-around my-4 border p-3 rounded shadow" *ngFor="let bookingDetails of allSuccessbookingDetails">
+        <app-booking-details-overview [bookingDetails]="bookingDetails"></app-booking-details-overview>
+    </div>
+</div>
+<ng-template #noBooking>
+    <div class="text-center my-3">No bookings</div>
+</ng-template>

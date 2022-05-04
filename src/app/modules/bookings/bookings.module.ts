@@ -8,6 +8,7 @@ import { AvailableBusesComponent } from './components/available-buses/available-
 import { ConfirmBookingComponent } from './components/confirm-booking/confirm-booking.component';
 import { BookingSuccessComponent } from './components/booking-success/booking-success.component';
 import { BookingDetailsOverviewComponent } from './components/booking-details-overview/booking-details-overview.component';
+import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { BookingDetailsOverviewComponent } from './components/booking-details-ov
     AvailableBusesComponent,
     ConfirmBookingComponent,
     BookingSuccessComponent,
-    BookingDetailsOverviewComponent
+    BookingDetailsOverviewComponent,
+    BookingDetailsComponent
   ],
   imports: [
     CommonModule,
