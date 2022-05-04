@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '../../models/location.model';
 import { BookingService } from '../../services/booking.service';
-import { faSortAmountDesc, faSortAmountAsc, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faSortAmountUpAlt, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-available-buses',
@@ -15,12 +15,27 @@ export class AvailableBusesComponent implements OnInit {
   departureLocation!: Location;
   arrivalLocation!: Location;
   date!: string | null;
-  ascIcon = faSortAmountAsc;
-  descIcon = faSortAmountDesc;
+  minPrice!: number;
+  maxPrice!: number;
+  ascIcon = faSortAmountUpAlt;
+  descIcon = faSortAmountDown;
   rightArrow = faArrowRight;
+  
 
+  sortStatus = {
+    isPriceSortedInAsc: false,
+    isDepartureTimeSortedInAsc: false,
+    isArrivalTimeSortedInAsc: false
+  }
 
-  availableBuses: any[] = []
+  filterStatus = {
+    busType: [],
+    seatingType: [],
+    price: [0, 0]
+  }
+
+  availableBusesResponse: any[] = []; 
+  availableBuses: any[] = [];
 
   constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
 
@@ -43,10 +58,57 @@ export class AvailableBusesComponent implements OnInit {
 
   fetchBuses(){
     this.bookingService.getBuses(this.departureLocation, this.arrivalLocation, this.date)
-      .subscribe(response => {this.availableBuses = response;});
+      .subscribe(response => {
+        this.availableBusesResponse = response;
+        this.availableBuses = response;
+        this.sortByPrice();
+        this.sortByDepartureTime();
+        this.sortByArrivalTime();
+        this.findMinAndMaxPrice();
+      });
   }
 
   getSeatLayout(scheduleId: any, busId: any, departureTime: any){
     this.router.navigate([`/seats/schedule/${scheduleId}/bus/${busId}/${this.date}/${departureTime}`])
+  }
+
+  sortByPrice(){
+
+    this.availableBuses.sort((bus1, bus2) => bus1.basePrice - bus2.basePrice);
+    if(this.sortStatus.isPriceSortedInAsc)
+      this.availableBuses.reverse();
+    
+    this.sortStatus.isPriceSortedInAsc = !this.sortStatus.isPriceSortedInAsc;
+
+  }
+
+  sortByDepartureTime(){
+    this.availableBuses.sort((bus1, bus2) => Date.parse(this.date + ' ' + bus1.departureTime) - Date.parse(this.date + ' ' + bus2.departureTime));
+    if(this.sortStatus.isDepartureTimeSortedInAsc)
+      this.availableBuses.reverse();
+    
+
+    this.sortStatus.isDepartureTimeSortedInAsc = !this.sortStatus.isDepartureTimeSortedInAsc;
+  }
+
+  sortByArrivalTime(){
+    this.availableBuses.sort((bus1, bus2) => (Date.parse(this.date + ' ' + bus1.departureTime) + bus1.duration * 60 * 1000) - (Date.parse(this.date + ' ' + bus2.departureTime) + bus1.duration * 60 * 1000));
+    if(this.sortStatus.isArrivalTimeSortedInAsc)
+      this.availableBuses.reverse();
+    
+    this.sortStatus.isArrivalTimeSortedInAsc = !this.sortStatus.isArrivalTimeSortedInAsc;
+  }
+
+  findMinAndMaxPrice(){
+    if(this.availableBusesResponse.length == 0)
+      return;
+    this.minPrice = this.availableBusesResponse[0].basePrice;
+    this.maxPrice = this.availableBusesResponse[0].basePrice;
+    for(let bus of this.availableBusesResponse){
+      if(bus.basePrice > this.maxPrice)
+        this.maxPrice = bus.basePrice;
+      if(bus.basePrice < this.minPrice)
+        this.minPrice = bus.basePrice;
+    }
   }
 }

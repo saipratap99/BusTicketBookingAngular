@@ -1,6 +1,5 @@
 .bus-name{
     font-size: 20px;
-    width: 400px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
