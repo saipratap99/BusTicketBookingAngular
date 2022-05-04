@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '../../models/location.model';
+import { FilterStatus } from '../../models/filter.model';
 import { BookingService } from '../../services/booking.service';
 import { faArrowRight, faSortAmountUpAlt, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-available-buses',
@@ -15,12 +17,10 @@ export class AvailableBusesComponent implements OnInit {
   departureLocation!: Location;
   arrivalLocation!: Location;
   date!: string | null;
-  minPrice!: number;
-  maxPrice!: number;
+  
   ascIcon = faSortAmountUpAlt;
   descIcon = faSortAmountDown;
   rightArrow = faArrowRight;
-  
 
   sortStatus = {
     isPriceSortedInAsc: false,
@@ -28,15 +28,20 @@ export class AvailableBusesComponent implements OnInit {
     isArrivalTimeSortedInAsc: false
   }
 
-  filterStatus = {
+  filterStatus: FilterStatus = {
     busType: [],
     seatingType: [],
     price: [0, 0]
   }
 
+  busTypes = ['AC', 'Non-AC'];
+  seatingTypes = ['Sleeper', 'Semi Sleeper'];
+
   availableBusesResponse: any[] = []; 
   availableBuses: any[] = [];
-
+  minPrice!: number;
+  maxPrice!: number;
+  
   constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
 
 
@@ -110,5 +115,36 @@ export class AvailableBusesComponent implements OnInit {
       if(bus.basePrice < this.minPrice)
         this.minPrice = bus.basePrice;
     }
+  }
+
+  onBusTypeChange(isChecked: boolean, busType: string){
+   if(isChecked)
+      this.filterStatus.busType.push(busType);
+    else{
+      if(this.filterStatus.busType.includes(busType))
+        this.filterStatus.busType.splice(this.filterStatus.busType.indexOf(busType), 1);
+  
+    }
+    
+    this.filterByBusType(this.filterStatus.busType.length == 0 ? this.busTypes : this.filterStatus.busType);
+  }
+
+  onSeatingTypeChange(isChecked: boolean, seatingType: string){
+    if(isChecked)
+      this.filterStatus.seatingType.push(seatingType);
+    else{
+      if(this.filterStatus.seatingType.includes(seatingType))
+        this.filterStatus.seatingType.splice(this.filterStatus.seatingType.indexOf(seatingType), 1);
+    }  
+    
+    this.filterBySeatingType(this.filterStatus.seatingType.length == 0 ? this.seatingTypes : this.filterStatus.seatingType);
+  }
+
+  filterByBusType(busTypes: string[]){
+    this.availableBuses = this.availableBusesResponse.filter(bus => busTypes.includes(bus.busDetails.busType));
+  }
+
+  filterBySeatingType(seatingTypes: string[]){
+    this.availableBuses = this.availableBusesResponse.filter(bus => seatingTypes.includes(bus.busDetails.seatingType.seating));
   }
 }
