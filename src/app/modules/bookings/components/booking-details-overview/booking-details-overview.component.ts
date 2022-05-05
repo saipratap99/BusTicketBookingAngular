@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-booking-details-overview',
@@ -8,6 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BookingDetailsOverviewComponent implements OnInit {
 
   @Input() bookingDetails!: any;
+
+  rightArrowIcon = faArrowRight;
   constructor() { }
 
   ngOnInit(): void {
