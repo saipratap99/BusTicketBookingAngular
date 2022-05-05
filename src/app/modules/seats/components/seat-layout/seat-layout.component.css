@@ -3,12 +3,13 @@
     height: 30px;
     text-align: center;
     border-radius: 3px;
-    border: 1px solid grey;
-    margin: 2px;
+    border: 1px solid #c1c1c1;
+    margin: 8px;
+    padding: 4px;
 }
 
 .booked{
-    background-color: gray;
+    background-color: #c1c1c1;
     color: white;
 }
 
@@ -17,7 +18,7 @@
 }
 
 .seat-checkbox:checked + .seat {
-    background-color: #F44336;
+    background-color: #20bf7a;
     color: white;
     border: none;
 }
@@ -25,4 +26,14 @@
 .no-seat{
     background-color: white;
     border: none;
+}
+
+.sleeper{
+    height: 50px;
+}
+
+#seats{
+    border: 1px solid #c1c1c1;
+    display: inline-block;
+    padding: 4px;
 }

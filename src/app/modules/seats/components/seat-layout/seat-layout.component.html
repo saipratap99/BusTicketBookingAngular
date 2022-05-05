@@ -8,7 +8,7 @@
             <div class="d-flex justify-content-center">
                 <div *ngFor="let col of cols">
                     <div *ngIf="col == cols.length;else noSeatFirstRow">
-                        <fa-icon [icon]="steering"></fa-icon>
+                        <img src="https://drg5ie3bz46tr.cloudfront.net/travel/rtravel/assets/96e1b97c.svg" alt="steering" width="20px" height="20px">
                     </div>
                     <ng-template #noSeatFirstRow>
                         <div class="seat no-seat"></div>
@@ -21,10 +21,10 @@
                     <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
                         <div *ngIf="seat.seatCol != undefined; else noSeat">
                             <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked)" #checkbox [disabled]="seat.booked"/>  
-                            <label class="seat" [for]="seat.seatName" [class.booked]="seat.booked">{{seat.seatName}}</label>
+                            <label class="seat small" [for]="seat.seatName" [class.booked]="seat.booked" [class.sleeper]="seat.seatingType == 'Sleeper'">{{seat.seatName}}</label>
                         </div> 
                         <ng-template #noSeat>
-                            <div class="seat no-seat"> </div>
+                            <div class="seat no-seat"></div>
                         </ng-template>
 
                     </div>

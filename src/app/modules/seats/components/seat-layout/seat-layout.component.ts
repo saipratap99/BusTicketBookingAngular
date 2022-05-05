@@ -20,7 +20,7 @@ export class SeatLayoutComponent implements OnInit {
   cols: number[] = []; 
   loading: boolean = false;
 
-  steering: any = faCircleDot
+  steering: any = faCircleDot 
   
   constructor(private route: ActivatedRoute, private seatService: SeatsService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
 
