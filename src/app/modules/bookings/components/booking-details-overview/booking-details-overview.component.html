@@ -2,11 +2,11 @@
 
 </div>
 <div class="row my-3">
-    <div class="col-9 booking-details-wrapper d-flex justify-content-center">
+    <div class="col-lg-9 col-12 booking-details-wrapper d-flex justify-content-center">
         <div class="booking-details rounded" *ngIf="bookingDetails">
             <div class="trip-details">
                 <h4 class="p-3 review-deatils">Trip Details</h4>
-                <div class="d-flex justify-content-evenly">
+                <div class="d-flex justify-content-evenly flex-xl-row flex-column">
                     <div class="deparure-arrival-details d-flex align-items-center">
                         <div class="departure-details mx-3">
                             <div class="d-flex align-items-center">
@@ -42,16 +42,16 @@
             </div>
         </div>
     </div>
-    <div class="col-3 price-breakup-wrapper d-flex justify-content-center">
+    <div class="col-lg-3 col-12 price-breakup-wrapper d-flex justify-content-center">
         <div class="price-breakup rounded">
             <h4 class="p-3 review-deatils">Fare Breakup</h4>
             <div>
                 <div class="d-flex">
-                    <div class="mx-3">Base price: </div>
+                    <div class="mx-3">Base price </div>
                     <div class="ms-auto mx-3">{{ bookingDetails.basePrice * bookingDetails.seats?.length | currency: 'INR'}} </div>
                 </div>
                 <div class="d-flex">
-                    <div class="mx-3">GST:</div>
+                    <div class="mx-3">GST</div>
                     <div class="ms-auto mx-3">+{{  (bookingDetails.gst * bookingDetails.seats?.length) * bookingDetails.basePrice/ 100 | currency: 'INR'}}</div>
                 </div>
                 <div class="d-flex">
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="d-flex">
-                <div class="mx-3">Total:</div>
+                <div class="mx-3">Total</div>
                 <div class="ms-auto mx-3"><strong>{{ bookingDetails.seats.length * bookingDetails.basePrice + ((bookingDetails.gst * bookingDetails.seats.length ) * bookingDetails.basePrice/ 100) - (( bookingDetails.discount* bookingDetails.seats?.length )* bookingDetails.basePrice/ 100) | currency: 'INR'}}</strong></div>
             </div>
         </div>

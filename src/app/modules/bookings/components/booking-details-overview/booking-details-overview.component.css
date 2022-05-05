@@ -41,3 +41,9 @@
     background-color: white;
     border: 2px solid #e9edee;
 }
+
+@media screen and (max-width: 768px) {
+    .price-breakup{
+        margin-top: 8px;
+    }
+}
