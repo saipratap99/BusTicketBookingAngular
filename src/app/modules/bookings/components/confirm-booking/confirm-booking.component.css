@@ -1,0 +1,14 @@
+.banner{
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    /* background-color: #002e6e; */
+    background-color: #742525e6;
+    z-index: -1;
+}
+
+.heading{
+    z-index: 10;
+    color: white;
+    margin-top: 20px;
+}

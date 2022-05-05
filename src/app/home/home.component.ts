@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faSackDollar, faBusAlt, faMoneyCheckAlt, faHeadset } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  lowPriceIcon = faSackDollar;
+  busIcon = faBusAlt;
+  dealsIcon = faMoneyCheckAlt;
+  supportIcon = faHeadset;
 
   constructor() { }
 

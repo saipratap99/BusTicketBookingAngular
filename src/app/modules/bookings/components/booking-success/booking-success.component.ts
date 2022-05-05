@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { BookingService } from '../../services/booking.service';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-booking-success',
@@ -12,6 +13,7 @@ export class BookingSuccessComponent implements OnInit {
 
   id!: number;
   bookingDetails: any = undefined;
+  successIcon = faCheckCircle;
 
   constructor(private route: ActivatedRoute, private bookingService: BookingService, private msgCommunicationService: MsgCommunicationService){ }
 

@@ -1,6 +1,9 @@
-<div class="alert alert-success mt-3 text-center" role="alert" *ngIf="id" >
-    <h5>Your booking is confimed. Booking id is {{id}} </h5>
-</div>
+<div class="banner"></div>
+<h4 class="heading" *ngIf="id">
+    Your booking is confimed. Booking id is {{id}}
+    <fa-icon [icon]="successIcon" class="success-icon"></fa-icon>
+</h4>
+
 <app-booking-details-overview [bookingDetails]="bookingDetails"></app-booking-details-overview>
 <div class="text-center">
     <button routerLink="" class="btn btn-primary">Home</button>
