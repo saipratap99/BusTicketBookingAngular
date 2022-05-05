@@ -2,25 +2,25 @@
 	<div class="banner d-flex flex-column justify-content-center align-items-center">
 		<h4 class="text-center text-dark">Book Bus Tickets</h4>
 		<form class="row gy-2 gx-3 align-items-center justify-content-center" [formGroup]="form" (ngSubmit)="getBuses()">
-			<div class="col-auto">
+			<div class="col-md-auto col-9">
 			  <label class="visually-hidden" for="autoSizingInput">Departure location</label>
 			  <input list="departureLocations" class="form-control" id="autoSizingInput" name="depLocation" placeholder="Search Departure location" formControlName="departureLocation" required autocomplete="off">
 			  <datalist id="departureLocations" *ngIf="departureLocations">
 				  <option [value]="departureLocation.locationName" *ngFor="let departureLocation of departureLocations">
 			  </datalist>
 			</div>
-			<div class="col-auto">
+			<div class="col-md-auto col-9">
 			  <label class="visually-hidden" for="autoSizingInput">Arrival location</label>
 			  <input list="arrivalLocations" class="form-control" id="autoSizingInput" name="arrLocation" placeholder="Search Arrival location" formControlName="arrivalLocation" required autocomplete="off">
 			  <datalist id="arrivalLocations" *ngIf="arrivalLocations">
 				  <option *ngFor="let arrivalLocation of arrivalLocations" [value]="arrivalLocation.locationName" >
 			  </datalist>
 			</div>
-			<div class="col-auto">
+			<div class="col-md-auto col-9">
 			  <label class="visually-hidden" for="autoSizingInputGroup">Choose date</label>
 			  <input type="date" class="form-control" id="autoSizingInputGroup" name="date" formControlName="date" required>
 			</div>
-			<div class="col-auto">
+			<div class="col-md-auto col-9 text-center">
 			  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Search</button>
 			</div>
 		  </form>

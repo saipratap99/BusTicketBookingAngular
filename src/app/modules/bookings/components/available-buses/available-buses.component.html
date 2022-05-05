@@ -24,7 +24,7 @@
     </div>
     <!-- <h4 class="text-primary text-center">Available Buses from {{departureLocation.locationName}} to {{arrivalLocation.locationName}} on {{date | date: 'fullDate'}}: </h4> -->
     <div class="row px-3">
-        <div class="filter-menu col-lg-2 d-md-none d-lg-block border rounded p-2">
+        <div class="filter-menu col-xl-2 col-12 border rounded p-2">
             <div class="border-bottom p-2">
                 <h5>Filter</h5>
                 <p class="text-muted small">Showing {{availableBuses.length}} of {{availableBusesResponse.length}} buses </p>
@@ -59,12 +59,12 @@
                 </div>
             </div>
         </div>
-        <div class="available-buses-list col-lg-10 col-md-12">
-            <div class="bus p-3 border rounded mb-2 d-flex justify-content-between align-items-center" *ngFor="let bus of availableBuses">
+        <div class="available-buses-list col-xl-10 col-12 my-lg-0 my-2">
+            <div class="bus p-3 border rounded mb-2 d-flex justify-content-evenly align-items-center flex-lg-row flex-column" *ngFor="let bus of availableBuses">
                 <div>
-                    <h5 class="bus-name">{{bus.busDetails.busName}}</h5>
+                    <h5 class="bus-name text-lg-start text-center">{{bus.busDetails.busName}}</h5>
                 </div>
-                <div class="d-flex justify-content-between align-items-center time">
+                <div class="time d-flex justify-content-between align-items-center my-lg-0 my-3">
                     <div class="text-center mx-3">
                         <div>{{ (date + ' ' + bus.departureTime) | date: 'shortTime' }}</div>
                         <div class="text-muted small">{{bus.serviceDetails.departureLocation.locationName}}</div>
@@ -78,11 +78,11 @@
                         <div class="text-muted small">{{bus.serviceDetails.arrivalLocation.locationName}}</div>
                     </div>			
                 </div>
-                <div class="d-flex align-items-center">
-                    <div class="mx-3 text-bold">
+                <div class="d-flex flex-lg-column justify-content-between align-items-center my-lg-0 my-3">
+                    <div class="mx-3">
                         <strong>{{ bus.basePrice | currency: 'INR'}}</strong>
                     </div>
-                    <div class="ml-auto">
+                    <div>
                         <button class="btn btn-primary" (click)="getSeatLayout(bus.id, bus.busDetails.id, bus.departureTime)">Select Seats</button>
                     </div>
                 </div>
