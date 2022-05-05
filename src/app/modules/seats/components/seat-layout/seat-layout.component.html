@@ -2,42 +2,60 @@
     <h3 class="text-center text-primary">Select Seats</h3>
     
     <div class="seat-layout text-center" *ngIf="seats">
-        
-        <section id="seats">
+        <div class="text-left my-3">
+            <h5>{{availableSeats}} Seats Available</h5>
+            <span class="text-muted small">Click on Seat to select / deselect </span>
+        </div>
+        <section id="seats" class="d-inline-flex justify-content-center">
             <!-- Wheel -->
-            <div class="d-flex justify-content-center">
-                <div *ngFor="let col of cols">
-                    <div *ngIf="col == cols.length;else noSeatFirstRow">
+            <div class="d-inline-block">
+                <div class="d-flex justify-content-center">
+                    <div class="p-1 my-1">
                         <img src="https://drg5ie3bz46tr.cloudfront.net/travel/rtravel/assets/96e1b97c.svg" alt="steering" width="20px" height="20px">
                     </div>
-                    <ng-template #noSeatFirstRow>
-                        <div class="seat no-seat"></div>
-                    </ng-template>
                 </div>
             </div>
             <!-- Seats -->
-            <div *ngFor="let row of rows" class="d-flex justify-content-center">
-                <div *ngFor="let col of cols">
-                    <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
-                        <div *ngIf="seat.seatCol != undefined; else noSeat">
-                            <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked)" #checkbox [disabled]="seat.booked"/>  
-                            <label class="seat small" [for]="seat.seatName" [class.booked]="seat.booked" [class.sleeper]="seat.seatingType == 'Sleeper'">{{seat.seatName}}</label>
-                        </div> 
-                        <ng-template #noSeat>
-                            <div class="seat no-seat"></div>
-                        </ng-template>
-
+            <div class="d-inline-block">
+                <div *ngFor="let col of cols.reverse()" class="d-flex justify-content-center">
+                    <div *ngFor="let row of rows">
+                        <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
+                            <div *ngIf="seat.seatCol != undefined; else noSeat">
+                                <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked)" #checkbox [disabled]="seat.booked"/>  
+                                <label class="seat small" [for]="seat.seatName" [class.booked]="seat.booked" [class.sleeper]="seat.seatingType == 'Sleeper'">{{seat.seatName}}</label>
+                            </div> 
+                            <ng-template #noSeat>
+                                <div class="seat no-seat"></div>
+                            </ng-template>
+    
+                        </div>
                     </div>
-                </div>
-            </div>    
+                </div>    
+            </div>
         </section>
+        <div class="d-flex justify-content-center">
+            <div class="d-flex align-items-center mx-3">
+                <label class="seat selected"></label>
+                <span class="mx-2 text-muted small">Selected Seat</span>
+            </div>
+            <div class="d-flex align-items-center mx-3">
+                <label class="seat booked"></label>
+                <span class="mx-2 text-muted small">Occupied Seat</span>
+            </div>
+            <div class="d-flex align-items-center mx-3">
+                <label class="seat"></label>
+                <span class="mx-2 text-muted small">Available Seat</span>
+            </div> 
+        </div>
+    </div>
 
+    <div class="text-center">
         <button class="btn btn-primary mt-3" (click)="onProceed()" [disabled]="loading">
             <span *ngIf="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             </span>
             {{ loading ? 'Booking..' : 'Proceed'}}
-        </button>
-
+        </button>    
     </div>
+
 </div>

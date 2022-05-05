@@ -19,6 +19,7 @@ export class SeatLayoutComponent implements OnInit {
   rows: number[] = [];
   cols: number[] = []; 
   loading: boolean = false;
+  availableSeats!: number;
 
   steering: any = faCircleDot 
   
@@ -38,6 +39,7 @@ export class SeatLayoutComponent implements OnInit {
         next: (data) => {
           this.seats = data;
           this.seperateSeatsByRows();
+          this.getAvailableSeatCount();
         },
         error: (err) => {
           this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true});
@@ -106,6 +108,9 @@ export class SeatLayoutComponent implements OnInit {
 
   }
 
-
+  getAvailableSeatCount(){
+    this.availableSeats = this.seats.reduce((prevValue, seat) => prevValue += seat.booked ? 0 : 1, 0);
+    console.log(this.availableSeats)
+  }
 }
 
