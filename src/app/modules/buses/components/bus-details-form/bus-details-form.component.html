@@ -1,0 +1,48 @@
+<form class="w-50 mx-auto" [formGroup]="busDetailsForm" (ngSubmit)="onSubmit()">
+    <fieldset>   
+          <div class="mb-3">
+            <label for="model" class="form-label">Bus Model</label>
+            <input type="text" class="form-control" id="busName" name="model" formControlName="model">
+          </div>
+            <div class="grid-row">
+              <div class="mb-3">
+                <label for="busRegNumber" class="form-label">Bus Registration Number</label>
+                <input type="text" class="form-control" id="busRegNumber" name="busRegNumber" formControlName="busRegNumber">
+              </div>
+              <div class="mb-3">
+                <label for="busType" class="form-label">Bus Type</label>
+                <input list="busTypes" value="" class="col-sm-6 custom-select custom-select-sm form-control" name="busType" formControlName="busType" placeholder="Select Bus Type" autocomplete="off">
+                <datalist id="busTypes" *ngIf="busTypes">
+                    <option *ngFor="let type of busTypes" [value]="type">
+                </datalist>
+              </div>
+            </div>
+          <div class="grid-row">
+              <div class="mb-3">
+                <label for="seatingType" class="form-label">Seating Type</label>
+                <input list="seatingTypes" value="" class="col-sm-6 custom-select custom-select-sm form-control" name="seatingType"  formControlName="seatingType" placeholder="Select Seating Type" autocomplete="off">
+                <datalist id="seatingTypes" *ngIf="seatingTypes">
+                    <option *ngFor="let type of seatingTypes" [value]="type.seating" >
+                </datalist>
+              </div>
+              <div class="mb-3">
+                <label for="seatCount" class="form-label">Seating Count</label>
+                <input type="number" class="form-control" id="seatCount" name="seatCount"  formControlName="seatCount">
+              </div>
+          </div>
+          <div class="grid-row">
+              <div class="mb-3">
+                <label for="lastMaintance" class="form-label">Last Maintenance</label>
+                <input type="date" class="form-control" id="lastMaintenance" name="lastMaintance" formControlName="lastMaintance">
+              </div>
+              <div class="mb-3">
+                <label for="onService" class="form-label">On Service</label>
+                <input type="date" class="form-control" id="onService" name="onService" formControlName="onService" >
+              </div>	
+          </div>
+          <div *ngIf="!disabled">
+            <button type="submit" class="btn btn-primary" [disabled]="!busDetailsForm.valid">Submit</button>
+          </div>
+        
+    </fieldset>
+</form>

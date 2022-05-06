@@ -5,12 +5,14 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToastBarComponent } from './components/toast-bar/toast-bar.component';
 import { AuthGuard } from './guard/auth.guard';
+import { BannerComponent } from './components/banner/banner.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    ToastBarComponent
+    ToastBarComponent,
+    BannerComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { AuthGuard } from './guard/auth.guard';
   exports: [
     NavbarComponent,
     ToastBarComponent,
+    BannerComponent
   ]
 })
 export class SharedModule { }

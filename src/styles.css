@@ -11,3 +11,15 @@
     border: none;
     background-color: transparent;
 }
+
+.over-banner-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.over-banner{
+    width: 95%;
+    background-color: white;
+    margin-top: 30px;
+}

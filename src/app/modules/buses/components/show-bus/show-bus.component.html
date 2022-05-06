@@ -1,0 +1,10 @@
+<app-banner></app-banner>
+<h4 class="heading">
+    Bus Details
+</h4><div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3" *ngIf="busDetails">
+        <app-bus-details-form [busDetails]="busDetails" [type]="'show'" [id]="id"></app-bus-details-form>
+    </div>
+</div>
+
+
