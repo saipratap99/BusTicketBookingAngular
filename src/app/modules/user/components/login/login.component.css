@@ -1,0 +1,29 @@
+.banner{
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    /* background-color: #002e6e; */
+    background-color: #742525e6;
+    z-index: -1;
+}
+
+.heading{
+    text-align: center;
+    z-index: 10;
+    color: white;
+    margin-top: 20px;
+}
+
+.userForm-wrapper{
+    width: 100%;
+}
+
+.userForm{
+    width: 95%;
+    background-color: white;
+    margin-top: 30px;
+}
+
+.login-img img{
+    width: 70%;
+}
