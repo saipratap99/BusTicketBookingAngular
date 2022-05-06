@@ -7,24 +7,24 @@
         <table class="table" >
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Bus Name</th>
-                    <th scope="col">Reg Number</th>
-                    <th scope="col">Bus type</th>
-                    <th scope="col">Seating type</th>
-                    <th scope="col">Update</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col" class="text-nowrap">Id</th>
+                    <th scope="col" class="text-nowrap">Bus Name</th>
+                    <th scope="col" class="text-nowrap">Reg Number</th>
+                    <th scope="col" class="text-nowrap">Bus type</th>
+                    <th scope="col" class="text-nowrap">Seating type</th>
+                    <th scope="col" class="text-nowrap">Update</th>
+                    <th scope="col" class="text-nowrap">Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let bus of busDetails">
                     <td><a [routerLink]="['/buses/show',bus?.id]">{{bus?.id}}</a></td>
-                    <td>{{ bus?.busName }}</td>
-                    <td> {{ bus?.busRegNumber }} </td>
-                    <td> {{ bus?.busType }} </td>
-                    <td> {{ bus?.seatingType }} </td>
-                    <td> <a [routerLink]="['/buses/edit', bus?.id ]" class="btn btn-primary">Update</a></td>
-                    <td> <a [routerLink]="['/buses/delete', bus?.id ]" class="btn btn-primary">Delete</a> </td>
+                    <td class="text-nowrap">{{ bus?.busName }}</td>
+                    <td class="text-nowrap"> {{ bus?.busRegNumber }} </td>
+                    <td class="text-nowrap"> {{ bus?.busType }} </td>
+                    <td class="text-nowrap"> {{ bus?.seatingType }} </td>
+                    <td class="text-nowrap"> <a [routerLink]="['/buses/edit', bus?.id ]" class="btn btn-primary">Update</a></td>
+                    <td class="text-nowrap"> <a [routerLink]="['/buses/delete', bus?.id ]" class="btn btn-primary">Delete</a> </td>
                 </tr>
             </tbody>
           </table>
