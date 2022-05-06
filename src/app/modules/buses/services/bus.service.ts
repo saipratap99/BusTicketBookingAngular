@@ -24,4 +24,8 @@ export class BusService {
   busDetailsRead(id?: number){
     return this.http.get(`${this.url}/bus_details/${id}`);
   }
+
+  getAllBusDetails(){
+    return this.http.get<any[]>(`${this.url}/bus_details/`);
+  }
 }

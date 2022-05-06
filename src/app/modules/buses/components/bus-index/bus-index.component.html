@@ -1,2 +1,35 @@
-<p>bus-index works!</p>
-<a routerLink="/buses/new">Create</a>
+<app-banner></app-banner>
+<h4 class="heading">
+    Bus Details
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3 overflow-auto" *ngIf="busDetails.length > 0">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Bus Name</th>
+                    <th scope="col">Reg Number</th>
+                    <th scope="col">Bus type</th>
+                    <th scope="col">Seating type</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bus of busDetails">
+                    <td><a [routerLink]="['/buses/show',bus?.id]">{{bus?.id}}</a></td>
+                    <td>{{ bus?.busName }}</td>
+                    <td> {{ bus?.busRegNumber }} </td>
+                    <td> {{ bus?.busType }} </td>
+                    <td> {{ bus?.seatingType }} </td>
+                    <td> <a [routerLink]="['/buses/edit', bus?.id ]" class="btn btn-primary">Update</a></td>
+                    <td> <a [routerLink]="['/buses/delete', bus?.id ]" class="btn btn-primary">Delete</a> </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="text-center my-3">
+    <a routerLink="/buses/new" class="btn btn-primary">Create</a>
+</div>
