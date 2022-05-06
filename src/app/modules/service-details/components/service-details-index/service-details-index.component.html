@@ -1,0 +1,39 @@
+<app-banner></app-banner>
+<h4 class="heading">
+    Service Details
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3 overflow-auto" *ngIf="serviceDetails.length > 0">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th scope="col" class="text-nowrap">Id</th>
+                    <th scope="col" class="text-nowrap">Service Name</th>
+                    <th scope="col" class="text-nowrap">Service Number</th>
+                    <th scope="col" class="text-nowrap">Service type</th>
+                    <th scope="col" class="text-nowrap">Departure Location</th>
+                    <th scope="col" class="text-nowrap">Arrival Location</th>
+                    <th scope="col" class="text-nowrap">Distance</th>
+                    <th scope="col" class="text-nowrap">Update</th>
+                    <th scope="col" class="text-nowrap">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let service of serviceDetails">
+                    <td><a [routerLink]="['/services/show',service?.id]">{{service?.id}}</a></td>
+                    <td class="text-nowrap"> {{ service?.serviceName }} </td>
+                    <td class="text-nowrap">{{ service?.serviceNumber }}</td>
+                    <td class="text-nowrap"> {{ service?.serviceType }} </td>
+                    <td class="text-nowrap"> {{ service?.departureLocation }} </td>
+                    <td class="text-nowrap"> {{ service?.arrivalLocation }} </td>
+                    <td class="text-nowrap"> {{ service?.distance }} </td>
+                    <td class="text-nowrap"> <a [routerLink]="['/services/edit', service?.id ]" class="btn btn-warning">Update</a></td>
+                    <td class="text-nowrap"> <a [routerLink]="['/services/delete', service?.id ]" class="btn btn-danger">Delete</a> </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="text-center my-3">
+    <a routerLink="/services/new" class="btn btn-primary">Create</a>
+</div>
