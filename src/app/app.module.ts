@@ -21,7 +21,7 @@ import { HomeComponent } from './home/home.component';
     NgbModule,
     SharedModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
