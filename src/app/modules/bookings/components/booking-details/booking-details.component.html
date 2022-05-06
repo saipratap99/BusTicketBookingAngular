@@ -1,11 +1,21 @@
-<h3 class="text-center text-primary">Bookings</h3>
+<div class="banner"></div>
+<h4 class="heading">
+    Bookings
+</h4>
 
-<div *ngIf="allSuccessbookingDetails.length > 0; else noBooking">
-    
-    <div class="d-flex justify-content-around my-4 border p-3 rounded shadow" *ngFor="let bookingDetails of allSuccessbookingDetails">
-        <app-booking-details-overview [bookingDetails]="bookingDetails"></app-booking-details-overview>
+<div class="bookings-wrapper d-flex justify-content-center">
+    <div *ngIf="allSuccessbookingDetails.length > 0; else noBooking" class="bookings border rounded">    
+        <div class="my-4 p-1 border-bottom" *ngFor="let bookingDetails of allSuccessbookingDetails">
+            <div class="d-flex justify-content-between">
+                <h5>Booking Id: {{bookingDetails.id}}</h5>
+                <span>Booked at <strong class="text-success">{{ bookingDetails.bookedAt | date: 'medium' }}</strong></span>
+            </div>
+            <app-booking-details-overview [bookingDetails]="bookingDetails"></app-booking-details-overview>
+        </div>
     </div>
+    <ng-template #noBooking>
+        <div class="text-center my-3 bookings p-1">
+            <h3>No bookings</h3>
+        </div>
+    </ng-template>
 </div>
-<ng-template #noBooking>
-    <div class="text-center my-3">No bookings</div>
-</ng-template>

@@ -1,0 +1,25 @@
+.banner{
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    /* background-color: #002e6e; */
+    background-color: #742525e6;
+    z-index: -1;
+}
+
+.heading{
+    text-align: center;
+    z-index: 10;
+    color: white;
+    margin-top: 20px;
+}
+
+.bookings-wrapper{
+    width: 100%;
+}
+
+.bookings{
+    margin-top: 30px;
+    background-color: white;
+    width: 95%;
+}
