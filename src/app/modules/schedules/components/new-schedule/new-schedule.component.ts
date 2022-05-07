@@ -10,7 +10,7 @@ export class NewScheduleComponent implements OnInit {
   schedule: any = {
     busId: '',
     serviceName: '',
-    basePrice: 0,
+    basePrice: '',
     departureTime: '',
     duration: '',
     weekDay: '',
@@ -19,6 +19,7 @@ export class NewScheduleComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

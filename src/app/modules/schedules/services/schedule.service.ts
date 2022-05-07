@@ -26,4 +26,11 @@ export class ScheduleService {
     }
   }
 
+  scheduleDetailsRead(id: number){
+    return this.http.get(`${this.url}/schedule/${id}`);
+  }
+
+  getAllScheduleDetails(){
+    return this.http.get<any[]>(`${this.url}/schedule/`);
+  }
 }

@@ -1,1 +1,9 @@
-<p>update-schedule works!</p>
+<app-banner></app-banner>
+<h4 class="heading">
+    Update Schedule
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3" *ngIf="schedule">
+        <app-schedule-form [schedule]="schedule" [type]="'update'" [id]="id"></app-schedule-form>
+    </div>
+</div>

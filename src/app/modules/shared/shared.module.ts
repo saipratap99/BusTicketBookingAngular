@@ -6,13 +6,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToastBarComponent } from './components/toast-bar/toast-bar.component';
 import { AuthGuard } from './guard/auth.guard';
 import { BannerComponent } from './components/banner/banner.component';
+import { WeekDayPipe } from './pipes/week-day.pipe';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     ToastBarComponent,
-    BannerComponent
+    BannerComponent,
+    WeekDayPipe
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { BannerComponent } from './components/banner/banner.component';
   exports: [
     NavbarComponent,
     ToastBarComponent,
-    BannerComponent
+    BannerComponent,
+    WeekDayPipe
   ]
 })
 export class SharedModule { }

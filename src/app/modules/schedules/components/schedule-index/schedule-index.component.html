@@ -1,1 +1,39 @@
-<p>schedule-index works!</p>
+<app-banner></app-banner>
+<h4 class="heading">
+    Schedule Details
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3 overflow-auto" *ngIf="scheduleDetails.length > 0">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th scope="col" class="text-nowrap">Id</th>
+                    <th scope="col" class="text-nowrap">Service Name</th>
+                    <th scope="col" class="text-nowrap">Bus Id</th>
+                    <th scope="col" class="text-nowrap">Week Day</th>
+                    <th scope="col" class="text-nowrap">Departure Time</th>
+                    <th scope="col" class="text-nowrap">Duration</th>
+                    <th scope="col" class="text-nowrap">Base Price</th>
+                    <th scope="col" class="text-nowrap">Update</th>
+                    <th scope="col" class="text-nowrap">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let schedule of scheduleDetails">
+                    <td><a [routerLink]="['/schedules/show',schedule?.id]">{{schedule?.id}}</a></td>
+                    <td class="text-nowrap"> <a [routerLink]="['/services/show',schedule?.serviceId]">{{ schedule?.serviceName }}</a> </td>
+                    <td class="text-nowrap"> <a [routerLink]="['/buses/show',schedule?.busId]">{{ schedule?.busId }}</a> </td>
+                    <td class="text-nowrap"> {{ schedule?.weekDay | weekDay}} </td>
+                    <td class="text-nowrap"> {{ schedule?.departureTime }} </td>
+                    <td class="text-nowrap"> {{ schedule?.duration }} </td>
+                    <td class="text-nowrap"> {{ schedule?.basePrice | currency: 'INR'}} </td>
+                    <td class="text-nowrap"> <a [routerLink]="['/schedules/edit', schedule?.id ]" class="btn btn-warning">Update</a></td>
+                    <td class="text-nowrap"> <a [routerLink]="['/schedules/delete', schedule?.id ]" class="btn btn-danger">Delete</a> </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="text-center my-3">
+    <a routerLink="/schedules/new" class="btn btn-primary">Create</a>
+</div>

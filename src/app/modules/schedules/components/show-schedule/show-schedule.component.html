@@ -1,1 +1,9 @@
-<p>show-schedule works!</p>
+<app-banner></app-banner>
+<h4 class="heading">
+    Show Schedule
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3" *ngIf="schedule">
+        <app-schedule-form [schedule]="schedule" [type]="'show'" [id]="id"></app-schedule-form>
+    </div>
+</div>
