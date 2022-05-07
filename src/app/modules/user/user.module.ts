@@ -7,12 +7,14 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { ToastBarComponent } from '../shared/components/toast-bar/toast-bar.component';
 import { SharedModule } from '../shared/shared.module';
+import { UsersIndexComponent } from './components/users-index/users-index.component';
 
 
 @NgModule({
   declarations: [
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    UsersIndexComponent
   ],
   imports: [
     CommonModule,

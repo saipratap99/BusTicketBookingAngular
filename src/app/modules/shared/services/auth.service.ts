@@ -86,6 +86,6 @@ export class AuthService {
 
   isOperatorOrAdmin(){
     const role = this.getRole();
-    return role === ('ROLE_OPERATOR' || role === 'ROLE_ADMIN') && this.isLoggedIn();
+    return ( role === 'ROLE_OPERATOR' || role === 'ROLE_ADMIN') && this.isLoggedIn();
   }
 }

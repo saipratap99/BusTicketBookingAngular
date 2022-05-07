@@ -13,7 +13,7 @@
             <li class="nav-item" *ngIf="authService.isLoggedIn()">
                 <a class="nav-link" aria-current="page" href="/bookings/">Bookings</a>
             </li>
-            <li class="nav-item" *ngIf="authService.isOperator()">
+            <li class="nav-item" *ngIf="authService.isOperatorOrAdmin()">
                 <a class="nav-link" aria-current="page" href="/buses/">Buses</a>
             </li>
             
@@ -24,7 +24,7 @@
                 <a class="nav-link" aria-current="page" href="/schedules/">Schedules</a>
             </li>
             <li class="nav-item" *ngIf="authService.isAdmin()">
-                <a class="nav-link" aria-current="page" href="/admin/users">Admin</a>
+                <a class="nav-link" aria-current="page" href="/users/">Admin</a>
             </li>
             <li class="nav-item" *ngIf="authService.isLoggedIn()">
                 <button class="btn btn-dark btn-sm" (click)="logOutUser()">Log out</button>

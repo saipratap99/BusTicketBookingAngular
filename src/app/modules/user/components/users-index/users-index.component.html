@@ -1,0 +1,32 @@
+<app-banner></app-banner>
+<h4 class="heading">
+    Users
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3 overflow-auto" *ngIf="users.length > 0">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th scope="col" class="text-nowrap">Id</th>
+                    <th scope="col" class="text-nowrap">Name</th>
+                    <th scope="col" class="text-nowrap">Email</th>
+                    <th scope="col" class="text-nowrap">Role</th>
+                    <th scope="col" class="text-nowrap">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td><a [routerLink]="['/users/show',user?.id]">{{user?.id}}</a></td>
+                    <td class="text-nowrap">{{ user?.name }}</td>
+                    <td class="text-nowrap"> {{ user?.email }} </td>
+                    <td class="text-nowrap"> {{ user?.role }} </td>
+                    <td class="text-nowrap"> 
+                        <button (click)="alterRole(user?.id, user?.role)" class="btn" [class.btn-danger]="user.role == 'ROLE_OPERATOR'" [class.btn-primary]="user.role == 'ROLE_USER'">
+                            {{ user.role == 'ROLE_OPERATOR' ? 'Remove as Operator' : 'Mark as Operator'}}
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
