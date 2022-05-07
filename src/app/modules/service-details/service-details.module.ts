@@ -10,14 +10,13 @@ import { ServiceDetailsIndexComponent } from './components/service-details-index
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     NewServiceDetailsComponent,
     ShowServiceDetailsComponent,
     UpdateServiceDetailsComponent,
     ServiceDetailsFormComponent,
-    ServiceDetailsIndexComponent
+    ServiceDetailsIndexComponent,
   ],
   imports: [
     CommonModule,

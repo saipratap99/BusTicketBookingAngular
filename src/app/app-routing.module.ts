@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'seats', loadChildren: ()=> import("./modules/seats/seats.module").then(module => module.SeatsModule) },
   { path: 'buses', loadChildren: () => import("./modules/buses/buses.module").then(module => module.BusesModule) },
   { path: 'services', loadChildren: () => import("./modules/service-details/service-details.module").then(module => module.ServiceDetailsModule) },
-
+  { path: 'schedules', loadChildren: () => import("./modules/schedules/schedules.module").then(module => module.SchedulesModule) },
 ];
 
 @NgModule({

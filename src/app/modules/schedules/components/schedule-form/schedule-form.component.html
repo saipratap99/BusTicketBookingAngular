@@ -1,0 +1,64 @@
+<form [formGroup]="scheduleDetailsForm" class="w-50 mx-auto" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <div class="mb-3">
+            <label for="serviceDetails" class="form-label">Service Details</label>
+            <input list="serviceDetails" class="col-sm-6 custom-select custom-select-sm form-control" name="service" formControlName="serviceName" placeholder="Select Service" autocomplete="off">
+            <datalist id="serviceDetails" *ngIf="services">
+                <option *ngFor="let service of services" [value]="service.serviceName">
+            </datalist>
+        </div>
+
+        <div class="mb-3">
+            <label for="busDetails" class="form-label">Bus Details</label>
+            <input list="busDetails" class="col-sm-6 custom-select custom-select-sm form-control" name="bus" formControlName="busId" placeholder="Select bus" autocomplete="off">
+            <datalist id="busDetails" *ngIf="buses">
+                <option *ngFor="let bus of buses" [value]="bus.id"> {{ bus.busName }}</option>
+            </datalist>
+        </div>
+            
+        <!--  
+        <div class="grid-row">
+             <div class="mb-3 grid-col date">
+                <label for="departureDate" class="form-label">Departure Date</label>
+                <input type="date" class="form-control" id="departureDate" name="departureDate">
+            </div>
+            <div class="mb-3 grid-col date">
+                <label for="arrivalDate" class="form-label">Departure Date</label>
+                <input type="date" class="form-control" id="arrivalDate" name="arrivalDate">
+            </div>                            
+        </div>
+        
+        -->
+        
+        <div class="mb-3">
+            <label for="week" class="form-label">Week Day</label>
+            <input list="weeks" class="col-sm-6 custom-select custom-select-sm form-control" name="week" formControlName="weekDay" placeholder="Select week" autocomplete="off">
+            <datalist id="weeks" *ngIf="weeks">
+                <option *ngFor="let week of weeks; let i = index" [value]="i+1">{{ week }}</option>
+            </datalist>
+        </div>
+       
+        <div class="grid-row">
+            <div class="mb-3 grid-col">
+                <label for="departureTime" class="form-label">Departure Time</label>
+                <input type="time" class="form-control" id="departureTime" name="depTime" formControlName="departureTime">
+            </div>    
+        
+            <div class="mb-3 grid-col">
+                <label for="tripDuration" class="form-label">Duration</label>
+                <input type="time" class="form-control" id="tripDuration" name="tripDuration" formControlName="duration">
+            </div>          
+        </div>
+        
+        <div class="mb-3">
+            <label for="basePrice" class="form-label">Base price</label>
+            <input type="number" class="form-control" id="basePrice" name="basePrice" formControlName="basePrice">
+        </div>
+        
+        <div>
+            <button type="submit" class="btn btn-primary" [disabled]="!scheduleDetailsForm.valid">Submit</button>
+        </div>
+        
+    </fieldset>
+</form>
+
