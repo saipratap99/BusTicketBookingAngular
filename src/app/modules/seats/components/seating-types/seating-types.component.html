@@ -1,0 +1,26 @@
+<app-banner></app-banner>
+<h4 class="heading">
+    Seating Types
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3 overflow-auto" *ngIf="seatingTypes.length > 0">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th scope="col" class="text-nowrap">Id</th>
+                    <th scope="col" class="text-nowrap">Seating Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let seating of seatingTypes">
+                    <!-- <td><a [routerLink]="['/seating/show',seating?.id]">{{seating?.id}}</a></td> -->
+                    <td> {{seating?.id}} </td>
+                    <td class="text-nowrap"> {{ seating?.seating }} </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="text-center my-3">
+    <a routerLink="/seats/new" class="btn btn-primary">Create</a>
+</div>

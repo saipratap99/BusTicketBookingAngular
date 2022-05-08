@@ -16,4 +16,12 @@ export class SeatsService {
   bookSelectedSeats(model: any){
     return this.http.post<any>(`${this.url}/booking/new`, model);
   }
+
+  createNewSeatLayout(model: any){
+    return this.http.post(`${this.url}/seats/new`, model);
+  }
+
+  getAllSeatingTypes(){
+    return this.http.get<any[]>(`${this.url}/seating-types/`);
+  }
 }

@@ -1,0 +1,56 @@
+<app-banner></app-banner>
+<h4 class="heading">
+    New Seating
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3 overflow-auto">
+        <form class="mx-auto" (submit)="false">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-lg-3 col-12 mb-3 grid-col">
+                    <label for="seatingType" class="form-label">Seating type</label>
+                    <input type="text" class="form-control" id="seatingType" name="seatingType" autocomplete="off" #seating autofocus="on">
+                </div>
+                <div class="col-lg-3 col-12 mb-3">
+                    <label for="rows" class="form-label">Rows</label>
+                    <input type="number" class="form-control" id="rows" name="rows" autocomplete="off" #rowsInput>
+                </div>
+                <div class="col-lg-3 col-12 mb-3">
+                    <label for="cols" class="form-label">Columns</label>
+                    <input type="number" class="form-control" id="rows" name="cols" autocomplete="off" #colsInput>
+                </div>	
+                		      
+                <div class="col-lg-3 col-12 mb-3">
+                    <label for="cols" class="form-label invisible">Submit</label><br>
+                    <button type="submit" class="btn btn-primary" (click)="generateLayout(seating.value, rowsInput.value, colsInput.value)">Generate Layout</button>
+                </div>
+            </div>
+        </form>   
+        <div class="seat-layout" *ngIf="seats">
+            <form (ngSubmit)="onSubmit()">
+                <div class="d-flex justify-content-center my-1">
+                    <div *ngFor="let col of cols">
+                        <div class="p-1 my-1" *ngIf="col+1 == cols.length;  else noSeat">
+                            <img src="https://drg5ie3bz46tr.cloudfront.net/travel/rtravel/assets/96e1b97c.svg" alt="steering" width="20px" height="20px">
+                        </div>
+                        <ng-template #noSeat>
+                            <div class="seat no-seat"></div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div *ngFor="let row of rows" class="d-flex justify-content-center my-2">
+                    <div *ngFor="let col of cols">
+                        <input type="text" class="seat" [(ngModel)]="seats.get(row)[col].seatName" [name]="row + '' + col" autocapitalize="true">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit" [disabled]="loading">
+                        <span *ngIf="loading">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        </span>
+                        {{ loading ? 'Loading..' : 'Proceed'}}
+                    </button>
+                </div>
+            </form>
+        </div>     
+    </div>
+</div>
