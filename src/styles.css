@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 .container-fluid{
     padding: 0px;
 }
@@ -26,4 +30,43 @@
 
 .text-nowrap{
     white-space: nowrap;
+}
+
+a{
+    color: #6025c0;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+a:hover{
+    background-color: #f0eafb;
+} 
+
+li a:hover{
+    background-color: transparent !important;
+}
+
+a.navbar-brand:hover{
+    background-color: transparent !important;
+}
+
+.btn-primary{
+    background-color: #4f1e9e;
+    border: 1px solid #4f1e9e;
+}
+
+.btn-primary:hover{
+    background-color: #3a0e82;
+    border: 1px solid #3a0e82;
+}
+
+.btn-primary:focus{
+    background-color: #3a0e82;
+    border-color: #3b0e828f;
+    box-shadow: 0 0 0 0.25rem #3b0e828f !important;
+}
+
+.btn-primary:disabled{
+    background-color: #643ba7d2;
+    border: 1px solid #643ba7d2;
 }
