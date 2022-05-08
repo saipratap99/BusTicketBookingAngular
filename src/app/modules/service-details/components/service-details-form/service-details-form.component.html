@@ -36,7 +36,12 @@
             <input type="number" class="form-control" id="distance" name="distance" formControlName="distance" autocomplete="off">
         </div>			  
         <div *ngIf="!disabled">
-            <button type="submit" class="btn btn-primary" [disabled]="!serviceDetailsForm.valid">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!serviceDetailsForm.valid" [disabled]="loading">
+                <span *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </span>
+                {{ loading ? 'Loading..' : 'Submit'}}    
+            </button>
         </div>
     </fieldset>
 </form>

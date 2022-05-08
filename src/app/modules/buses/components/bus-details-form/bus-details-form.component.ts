@@ -59,8 +59,8 @@ export class BusDetailsFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.loading = true;
     if(this.busDetailsForm.valid){
+      this.loading = true;
       this.busService.busDetailsCreateAndUpdate(this.busDetailsForm.value, this.type, this.id)
       .subscribe({
         next: (data) => {

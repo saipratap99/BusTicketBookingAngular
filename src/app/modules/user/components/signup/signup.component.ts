@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
 
   @ViewChild('userform') userForm: any;
   model: Signup = new Signup();
+  loading: boolean = false;
 
   constructor(private userService: UserService, private msgCommunicationService: MsgCommunicationService) { }
 
@@ -22,12 +23,14 @@ export class SignupComponent implements OnInit {
 
   onSubmit(){
     if(this.userForm.valid){
+      this.loading = true;
       console.log("Form submitted");
       this.userService.createUser(this.model)
         .subscribe({
           next: (v) => {
             console.log(v);
             this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(v)).firstName + ' has been added!', status: 'success', show: true});
+            this.userForm.reset();
           },
 
           error: (err) => {
@@ -35,8 +38,8 @@ export class SignupComponent implements OnInit {
           },
 
           complete: () => {
-            console.log("Done")
-            this.userForm.reset();
+            console.log("Done");
+            this.loading = false;
           }
         })
     }

@@ -56,7 +56,12 @@
         </div>
         
         <div *ngIf="!disabled">
-            <button type="submit" class="btn btn-primary" [disabled]="!scheduleDetailsForm.valid">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!scheduleDetailsForm.valid" [disabled]="loading">
+                <span *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </span>
+                {{ loading ? 'Loading..' : 'Submit'}}
+            </button>
         </div>
         
     </fieldset>

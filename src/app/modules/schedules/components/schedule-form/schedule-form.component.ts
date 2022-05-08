@@ -73,8 +73,8 @@ export class ScheduleFormComponent implements OnInit {
 
   
   onSubmit(){
-    this.loading = true;
     if(this.scheduleDetailsForm.valid){
+      this.loading = true;
       this.scheduleService.scheduleDetailsDetailsCreateAndUpdate(this.scheduleDetailsForm.value, this.type, this.id)
       .subscribe({
         next: (data) => {

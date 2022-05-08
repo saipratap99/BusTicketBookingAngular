@@ -54,8 +54,8 @@ export class ServiceDetailsFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.loading = true;
     if(this.serviceDetailsForm.valid){
+      this.loading = true;
       this.serviceDetailsService.serviceDetailsCreateAndUpdate(this.serviceDetailsForm.value, this.type, this.id)
       .subscribe({
         next: (data) => {

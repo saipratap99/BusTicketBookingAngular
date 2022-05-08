@@ -39,7 +39,12 @@
                     <input type="password" class="form-control" name="confirmPassword" id="confirm_password" [(ngModel)]="model.confirmPassword" minlength="5" required>
                 </div>
                 
-                <button type="submit" class="btn btn-primary form-control" [disabled]="!userform.valid">Submit</button>
+                <button type="submit" class="btn btn-primary form-control" [disabled]="loading" [disabled]="!userform.valid">
+                    <span *ngIf="loading">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    </span>
+                    {{ loading ? 'Loading..' : 'SignUp'}}
+                </button>
             </fieldset>
         </form>
     </div>  
