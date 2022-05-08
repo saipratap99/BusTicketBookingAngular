@@ -10,11 +10,13 @@
 }
 
 .departure-time{
-    color: #742525e6;
+    /* color: #742525e6; */
+    color: #380d80;
 }
 
 .departure-location{
-    color: #742525e6;
+    /* color: #742525e6; */
+    color: #380d80;
 }
 
 /* .price-breakup-wrapper{
