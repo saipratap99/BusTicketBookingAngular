@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   // show!: boolean ;
   loading: boolean = false;
 
-  constructor(private authService: AuthService, private route: Router, private msgCommunicationService: MsgCommunicationService) { }
+  constructor(private authService: AuthService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
           this.msgCommunicationService.msgEvent.emit({msg: "Welcome back user!", status: "success", show: true})
           if(jwt)
             this.authService.setSession(jwt);
+          this.router.navigate(['']);
         },
         error: (err) => {
           this.loading = false;
