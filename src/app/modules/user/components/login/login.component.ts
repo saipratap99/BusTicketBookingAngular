@@ -37,10 +37,7 @@ export class LoginComponent implements OnInit {
           if(jwt)
             this.authService.setSession(jwt);
         },
-
         error: (err) => {
-          console.log(err);
-          this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(err)).error, status: "danger", show: true});
           this.loading = false;
         },
 

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 
 import { Signup } from '../../models/signup.model';
 import { UserService } from '../../services/user.service';
@@ -13,13 +14,7 @@ export class SignupComponent implements OnInit {
   @ViewChild('userform') userForm: any;
   model: Signup = new Signup();
 
-  // toastBar Attributes
-  msg!: string;
-  status!: string;
-  show!: boolean ;
-
-  // @Output('passMsg') passMsg = new EventEmitter<any>();
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
 
@@ -32,18 +27,11 @@ export class SignupComponent implements OnInit {
         .subscribe({
           next: (v) => {
             console.log(v);
-            this.msg = JSON.parse(JSON.stringify(v)).firstName + ' has been added!'; 
-            this.status = 'success';
-            this.show = true;
-            // this.passMsg.emit({msg: JSON.parse(JSON.stringify(v)).firstName, status: "success", show: true})
+            this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(v)).firstName + ' has been added!', status: 'success', show: true});
           },
 
           error: (err) => {
             console.log(err);
-            this.msg = JSON.parse(JSON.stringify(err)).error; 
-            this.status = 'danger';
-            this.show = true;
-            // this.passMsg.emit({msg: "Error creating", status: "danger", show: true});
           },
 
           complete: () => {
