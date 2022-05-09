@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  currPage: string = 'Home'
+
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
@@ -15,6 +17,10 @@ export class NavbarComponent implements OnInit {
 
   logOutUser(){
     this.authService.logOut();
+  }
+
+  setActive(page: string){
+    this.currPage = page;
   }
 
 }
