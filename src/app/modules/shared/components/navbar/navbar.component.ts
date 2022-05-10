@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logOutUser(){
+    this.currPage = 'Home';
     this.authService.logOut();
   }
 

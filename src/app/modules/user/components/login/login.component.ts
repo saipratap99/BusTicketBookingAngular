@@ -31,11 +31,14 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.authService.authenticateUser(this.model)
       .subscribe({
-        next: (v) => {
-          const jwt  = v.headers.get('Authorization');
+        next: (data) => {
+          console.log(data, JSON.parse(JSON.stringify(data))?.body?.jwt);
+          const jwt = JSON.parse(JSON.stringify(data))?.body?.jwt;
+          const refreshToken = JSON.parse(JSON.stringify(data))?.body?.refreshToken;
+          console.log(jwt)
           this.msgCommunicationService.msgEvent.emit({msg: "Welcome back user!", status: "success", show: true})
           if(jwt)
-            this.authService.setSession(jwt);
+            this.authService.setSession('Bearer ' + jwt, refreshToken);
           this.router.navigate(['']);
         },
         error: (err) => {

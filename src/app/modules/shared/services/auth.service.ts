@@ -20,20 +20,26 @@ export class AuthService {
     return this.http.post(`${this.url}/login`, model, {observe: 'response'});
   }
 
-  setSession(jwt: string){
-    const expiresAt = moment().add(10*60*60, 'second');
+  setSession(jwt: string, refreshToken: string){
+    const expiresAt = moment().add(60 * 30, 'second');
 
     localStorage.setItem('token', jwt);
+    localStorage.setItem('refreshToken', refreshToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
   }
 
+  
+
   logOut(){
     if(confirm("Are you sure to logout?")){
-      localStorage.removeItem('token');
-      localStorage.removeItem('expires_at');
+      this.clearSession();
+    }
+  }
+
+  clearSession(){
+      localStorage.clear();
       this.payLoad = undefined;
       this.router.navigate(['/']);
-    }
   }
 
   isLoggedIn(){
@@ -42,6 +48,10 @@ export class AuthService {
       this.payLoad = undefined;
     }
     return moment().isBefore(this.getExpiration());
+  }
+
+  isExpired(){
+    return !moment().isBefore(this.getExpiration());
   }
   
   getExpiration(){
