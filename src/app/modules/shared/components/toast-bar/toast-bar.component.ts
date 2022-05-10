@@ -21,6 +21,9 @@ export class ToastBarComponent implements OnInit {
       this.show = toastBarMsg.show;
       this.msg = toastBarMsg.msg;
       this.status = toastBarMsg.status;
+      setTimeout(() => {
+        this.closeToastBar();
+      }, 5000);
     })
 
     
