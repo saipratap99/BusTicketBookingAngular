@@ -85,6 +85,7 @@ export class SeatLayoutComponent implements OnInit {
   onProceed(){
     this.loading = true;
     const paramMap = this.route.snapshot.paramMap;
+
     let model: any = {
       "scheduleId": paramMap.get('scheduleId'),
       "busId": paramMap.get('busId'),
@@ -93,24 +94,21 @@ export class SeatLayoutComponent implements OnInit {
       "selectedSeats": this.seatsSelected
     }
 
-    console.log(model);
-
     this.seatService.bookSelectedSeats(model)
       .subscribe({  
         next: (data) => {
           this.router.navigate([`/bookings/confirm/${data.bookingId}`])
-          console.log(data.bookingId)
-          this.loading = false;
         },
-        error: (err) => {console.log(err); this.loading = false;},
-        complete: () => {}
+        error: (err) => {console.log(err)},
+        complete: () => {
+          this.loading = false;
+        }
       })
 
   }
 
   getAvailableSeatCount(){
     this.availableSeats = this.seats.reduce((prevValue, seat) => prevValue += seat.booked ? 0 : 1, 0);
-    console.log(this.availableSeats)
   }
 }
 

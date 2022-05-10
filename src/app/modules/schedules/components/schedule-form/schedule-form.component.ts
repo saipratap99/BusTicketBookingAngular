@@ -81,14 +81,13 @@ export class ScheduleFormComponent implements OnInit {
           console.log(data);
           let action = this.type === 'create' ? 'added' : 'updated'
           this.msgCommunicationService.msgEvent.emit({msg: `Schedule details ${action} ${JSON.parse(JSON.stringify(data)).id}`, status: 'success', show: true});
-          this.scheduleDetailsForm.reset;
-          this.loading = false;
+          this.scheduleDetailsForm.reset();
         },
         error: (err) => {
           console.log(err);
           this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: 'danger', show: true});
-          this.loading = false;
-        } 
+        },
+        complete: () => this.loading = false 
       })
     }
     

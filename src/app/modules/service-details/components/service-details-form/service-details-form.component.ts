@@ -62,14 +62,13 @@ export class ServiceDetailsFormComponent implements OnInit {
           console.log(data);
           let action = this.type === 'create' ? 'added' : 'updated'
           this.msgCommunicationService.msgEvent.emit({msg: `Service details ${action} ${JSON.parse(JSON.stringify(data)).serviceName}`, status: 'success', show: true});
-          this.serviceDetailsForm.reset;
-          this.loading = false;
+          this.serviceDetailsForm.reset();
         },
         error: (err) => {
           console.log(err);
           this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: 'danger', show: true});
-          this.loading = false;
-        } 
+        },
+        complete: () => this.loading = false 
       })
     }
   }

@@ -67,14 +67,13 @@ export class BusDetailsFormComponent implements OnInit {
           console.log(data);
           let action = this.type === 'create' ? 'added' : 'updated'
           this.msgCommunicationService.msgEvent.emit({msg: `Bus details ${action} ${JSON.parse(JSON.stringify(data)).busName}`, status: 'success', show: true});
-          this.busDetailsForm.reset;
-          this.loading = false;
+          this.busDetailsForm.reset();
         },
         error: (err) => {
           console.log(err);
           this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: 'danger', show: true});
-          this.loading = false;
-        } 
+        },
+        complete: () => this.loading = false
       })
     }
   }
