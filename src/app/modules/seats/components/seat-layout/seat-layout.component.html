@@ -7,7 +7,7 @@
             <span class="small text-primary">Click on Seat to select / deselect </span>
         </div>
         <div class="overflow-auto p-3">
-            <section id="seats" class="d-inline-flex justify-content-center">
+            <section id="seats" class="d-inline-flex justify-content-center my-3">
                 <!-- Wheel -->
                 <div class="d-inline-block">
                     <div class="d-flex justify-content-center">
@@ -23,7 +23,7 @@
                             <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
                                 <div *ngIf="seat.seatCol != undefined; else noSeat">
                                     <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked)" #checkbox [disabled]="seat.booked"/>  
-                                    <label class="seat small" [for]="seat.seatName" [class.booked]="seat.booked" [class.sleeper]="seat.seatingType == 'Sleeper'">{{seat.seatName}}</label>
+                                    <label class="seat small" [for]="seat.seatName" [class.booked]="seat.booked" [class.sleeper]="seat?.seatingType?.includes('Sleeper')">{{seat.seatName}}</label>
                                 </div> 
                                 <ng-template #noSeat>
                                     <div class="seat no-seat"></div>

@@ -32,14 +32,15 @@ export class LoginComponent implements OnInit {
       this.authService.authenticateUser(this.model)
       .subscribe({
         next: (data) => {
-          console.log(data, JSON.parse(JSON.stringify(data))?.body?.jwt);
+          // console.log(data, JSON.parse(JSON.stringify(data))?.body?.jwt);
           const jwt = JSON.parse(JSON.stringify(data))?.body?.jwt;
           const refreshToken = JSON.parse(JSON.stringify(data))?.body?.refreshToken;
-          console.log(jwt)
+          // console.log(jwt)
           this.msgCommunicationService.msgEvent.emit({msg: "Welcome back user!", status: "success", show: true})
           if(jwt)
             this.authService.setSession('Bearer ' + jwt, refreshToken);
           this.router.navigate(['']);
+          this.loginForm.reset();
         },
         error: (err) => {
           this.loading = false;
@@ -47,9 +48,6 @@ export class LoginComponent implements OnInit {
 
         complete: () => {
           this.loading = false;
-          console.log("Done")
-          // this.route.navigate(['/']);
-          this.loginForm.reset();
         }
       })
     }

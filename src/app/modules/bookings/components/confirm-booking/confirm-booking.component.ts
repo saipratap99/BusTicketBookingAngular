@@ -30,7 +30,10 @@ export class ConfirmBookingComponent implements OnInit {
           this.bookingDetails = data;
           console.log(data)
         },
-        error: (err) => this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true}),
+        error: (err) => {
+          console.log(err);
+          this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true});
+        },
       })
   }
 

@@ -14,3 +14,12 @@
     background-color: white;
     width: 95%;
 }
+
+/* .bookings-wrapper{
+    animation: loadContent 2s ease-in 0s 1 normal forwards;
+}
+
+@keyframes loadContent{
+    from { background-color: transparent; }
+    to { background-color:  transparent;}
+} */

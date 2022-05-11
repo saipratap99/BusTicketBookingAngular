@@ -8,3 +8,7 @@
 .success-icon{
     color: #39d539;
 }
+
+.failed-icon{
+    color: rgb(219, 66, 66);
+}

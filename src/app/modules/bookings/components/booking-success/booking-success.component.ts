@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { BookingService } from '../../services/booking.service';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-booking-success',
@@ -13,7 +13,9 @@ export class BookingSuccessComponent implements OnInit {
 
   id!: number;
   bookingDetails: any = undefined;
-  successIcon = faCheckCircle;
+  bookingSuccess!: boolean;
+  bookingStatus!: string; 
+  statusIcon: any = undefined;
 
   constructor(private route: ActivatedRoute, private bookingService: BookingService, private msgCommunicationService: MsgCommunicationService){ }
 
@@ -22,9 +24,19 @@ export class BookingSuccessComponent implements OnInit {
       this.id = Number(params.get('bookingId'));
       this.bookingService.confirmBooking(this.id)
         .subscribe({
-          next: (data) => this.bookingDetails = data,
+          next: (data) => {
+            this.bookingDetails = data;
+            this.bookingSuccess = true;
+            this.bookingStatus = `Your booking is confimed. Booking id is ${this.id}` 
+            this.statusIcon = faCheckCircle;
+          },
           error: (err) => {
-            this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true})
+            console.log('success')
+            this.bookingSuccess = false;
+            this.bookingStatus = `${err.error.msg}`;
+            console.log(this.bookingStatus)
+            this.statusIcon = faTimesCircle;
+            this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true});
           }
         })
       

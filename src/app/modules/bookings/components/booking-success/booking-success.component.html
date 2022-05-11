@@ -1,7 +1,7 @@
 <app-banner></app-banner>
-<h4 class="heading" *ngIf="id">
-    Your booking is confimed. Booking id is {{id}}
-    <fa-icon [icon]="successIcon" class="success-icon"></fa-icon>
+<h4 class="heading" *ngIf="bookingStatus">
+    {{ bookingStatus }}
+    <fa-icon [icon]="statusIcon" [class.success-icon]="bookingSuccess" [class.failed-icon]="!bookingSuccess"></fa-icon>
 </h4>
 
 <app-booking-details-overview [bookingDetails]="bookingDetails"></app-booking-details-overview>
