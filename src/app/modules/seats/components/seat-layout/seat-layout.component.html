@@ -18,7 +18,7 @@
                 </div>
                 <!-- Seats -->
                 <div class="d-inline-block">
-                    <div *ngFor="let col of cols.reverse()" class="d-flex justify-content-center">
+                    <div *ngFor="let col of cols.reverse()" class="d-flex justify-content-end">
                         <div *ngFor="let row of rows">
                             <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
                                 <div *ngIf="seat.seatCol != undefined; else noSeat">
@@ -52,12 +52,13 @@
     </div>
 
     <div class="text-center">
-        <button class="btn btn-primary mt-3" (click)="onProceed()" [disabled]="loading">
+        <button class="btn btn-primary mt-3 mx-2" (click)="onProceed()" [disabled]="loading">
             <span *ngIf="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             </span>
             {{ loading ? 'Booking..' : 'Proceed'}}
         </button>    
+        
     </div>
 
 </div>
