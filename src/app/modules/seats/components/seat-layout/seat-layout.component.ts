@@ -94,6 +94,9 @@ export class SeatLayoutComponent implements OnInit {
       "selectedSeats": this.seatsSelected
     }
 
+    // - replaced with : in time param
+    model.time = model.time.replaceAll('-',':');
+    
     this.seatService.bookSelectedSeats(model)
       .subscribe({  
         next: (data) => {

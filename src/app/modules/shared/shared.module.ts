@@ -7,6 +7,7 @@ import { ToastBarComponent } from './components/toast-bar/toast-bar.component';
 import { AuthGuard } from './guard/auth.guard';
 import { BannerComponent } from './components/banner/banner.component';
 import { WeekDayPipe } from './pipes/week-day.pipe';
+import { globalVars } from './models/urls.model';
 
 
 @NgModule({

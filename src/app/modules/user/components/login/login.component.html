@@ -10,8 +10,11 @@
         <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="w-50">
             <fieldset>
                 <div>
-                    <p class="text-center">
-                    New User? <a href="/users/new">SignUp Here</a>
+                    <p class="text-center" *ngIf="redirectURL">
+                    New User? <a [routerLink]="['/users/new']" [queryParams]="{redirectURL: redirectURL}">SignUp Here</a>
+                    </p>
+                    <p class="text-center" *ngIf="!redirectURL">
+                        New User? <a [routerLink]="['/users/new']">SignUp Here</a>
                     </p>
                 </div>
                 <div class="mb-3">

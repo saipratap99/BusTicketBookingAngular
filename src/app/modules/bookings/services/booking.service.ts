@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Location } from '../models/location.model';
+import { globalVars } from '../../shared/models/urls.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
 
-  url: string = 'http://localhost:8080/api/v1';
+  url: string = `${globalVars.backendAPI}`;
   constructor(private http: HttpClient) { }
 
   getLocation(locationName: string){

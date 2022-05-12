@@ -5,6 +5,8 @@ import { FilterStatus } from '../../models/filter.model';
 import { BookingService } from '../../services/booking.service';
 import { faArrowRight, faSortAmountUpAlt, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import { filter } from 'rxjs';
+import { AuthService } from 'src/app/modules/shared/services/auth.service';
+import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 
 @Component({
   selector: 'app-available-buses',
@@ -42,7 +44,7 @@ export class AvailableBusesComponent implements OnInit {
   minPrice!: number;
   maxPrice!: number;
   
-  constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private bookingService: BookingService, private router: Router, private authService: AuthService, private msgCommunicationService: MsgCommunicationService) { }
 
 
   ngOnInit(): void {
@@ -74,7 +76,12 @@ export class AvailableBusesComponent implements OnInit {
   }
 
   getSeatLayout(scheduleId: any, busId: any, departureTime: any){
-    this.router.navigate([`/seats/schedule/${scheduleId}/bus/${busId}/${this.date}/${departureTime}`])
+    // if(this.authService.isLoggedIn())
+    this.router.navigate([`/seats/schedule/${scheduleId}/bus/${busId}/${this.date}/${departureTime.replaceAll(':','-')}`])
+    // else{
+    //   this.router.navigate([`/users/login?next=/seats/schedule/${scheduleId}/bus/${busId}/${this.date}/${departureTime}`]);
+    //   this.msgCommunicationService.msgEvent.emit({msg: 'Please login to continue', status: 'danger', show: true});
+    // }
   }
 
   sortByPrice(){

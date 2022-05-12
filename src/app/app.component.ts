@@ -16,6 +16,7 @@ export class AppComponent {
   title = 'bus-ticket-booking';
 
   constructor(){}
+
   setToastBarData($event: any){
     console.log("Pass msg event triggered");
     this.msg = $event.msg;

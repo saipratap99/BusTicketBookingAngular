@@ -19,7 +19,8 @@ export class AuthGuard implements CanActivate {
       return true;
     else{
       this.msgCommunicationService.msgEvent.emit({msg: 'Please login!', status: 'danger', show: true});
-      this.router.navigate(['/']);
+      console.log(state.url);
+      this.router.navigate(['/users/login'], { queryParams: { 'redirectURL': state.url } });
       return false;
     }
   }

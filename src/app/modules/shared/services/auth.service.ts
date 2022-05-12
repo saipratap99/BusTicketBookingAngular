@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Login } from '../../user/models/login.model';
 import * as moment from "moment";
 import { Router } from '@angular/router';
+import { globalVars } from '../models/urls.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  url: string = "http://localhost:8080/api/v1/users"
+  url: string = `${globalVars.backendAPI}/users`
   private payLoad: any = undefined;
   
   constructor(private http: HttpClient, private router: Router) { 

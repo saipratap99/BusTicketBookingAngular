@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { Login } from '../../models/login.model';
@@ -15,15 +14,16 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm: any;
   model: Login = new Login();
 
-  // // toastBar Attributes
-  // msg!: string;
-  // status!: string;
-  // show!: boolean ;
   loading: boolean = false;
+  redirectURL: string | null = ''; 
 
-  constructor(private authService: AuthService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
+  constructor(private authService: AuthService, private router: Router, private msgCommunicationService: MsgCommunicationService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.route.queryParamMap.subscribe(params => {
+      this.redirectURL = params.get('redirectURL') != null ? params.get('redirectURL') : '';;    
+      console.log( this.redirectURL)
+    })
   }
 
   onSubmit(){
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           this.msgCommunicationService.msgEvent.emit({msg: "Welcome back user!", status: "success", show: true})
           if(jwt)
             this.authService.setSession('Bearer ' + jwt, refreshToken);
-          this.router.navigate(['']);
+          this.router.navigate([this.redirectURL]);
           this.loginForm.reset();
         },
         error: (err) => {

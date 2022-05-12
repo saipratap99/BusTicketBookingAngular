@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { catchError, Observable, of, tap } from "rxjs";
 import { AuthService } from "../modules/shared/services/auth.service";
 import { MsgCommunicationService } from "../modules/shared/services/msg-communication.service";
+import { globalVars } from "../modules/shared/models/urls.model";
 
 @Injectable({
     providedIn: 'root'
@@ -49,7 +50,7 @@ export class AppHttpInterceptor implements HttpInterceptor{
 
     refreshAccessToken(){
         console.log("refresh", localStorage.getItem('refreshToken'))
-        this.http.post(`http://localhost:8080/api/v1/users/auth/refresh-token/${localStorage.getItem('refreshToken')}`, { refreshToken: localStorage.getItem('refreshToken') })
+        this.http.post(`${globalVars.backendAPI}/users/auth/refresh-token/${localStorage.getItem('refreshToken')}`, { refreshToken: localStorage.getItem('refreshToken') })
             .subscribe({
                 next: (data) => {
                     console.log(data);
