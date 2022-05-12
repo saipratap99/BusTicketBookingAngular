@@ -31,9 +31,9 @@ export class AvailableBusesComponent implements OnInit {
   }
 
   filterStatus: FilterStatus = {
-    busType: [],
-    seatingType: [],
-    price: [0, 0]
+    busTypes: [],
+    seatingTypes: [],
+    priceRange: [0, 0]
   }
 
   busTypes = ['AC', 'Non-AC'];
@@ -122,29 +122,40 @@ export class AvailableBusesComponent implements OnInit {
       if(bus.basePrice < this.minPrice)
         this.minPrice = bus.basePrice;
     }
+
+    this.filterStatus.priceRange[0] = this.minPrice;
+    this.filterStatus.priceRange[1] = this.maxPrice;
+
   }
 
   onBusTypeChange(isChecked: boolean, busType: string){
    if(isChecked)
-      this.filterStatus.busType.push(busType);
+      this.filterStatus.busTypes.push(busType);
     else{
-      if(this.filterStatus.busType.includes(busType))
-        this.filterStatus.busType.splice(this.filterStatus.busType.indexOf(busType), 1);
+      if(this.filterStatus.busTypes.includes(busType))
+        this.filterStatus.busTypes.splice(this.filterStatus.busTypes.indexOf(busType), 1);
   
     }
-    
-    this.filterByBusType(this.filterStatus.busType.length == 0 ? this.busTypes : this.filterStatus.busType);
+    this.filterBusDetails();
+    // this.filterByBusType(this.filterStatus.busType.length == 0 ? this.busTypes : this.filterStatus.busType);
   }
 
   onSeatingTypeChange(isChecked: boolean, seatingType: string){
     if(isChecked)
-      this.filterStatus.seatingType.push(seatingType);
+      this.filterStatus.seatingTypes.push(seatingType);
     else{
-      if(this.filterStatus.seatingType.includes(seatingType))
-        this.filterStatus.seatingType.splice(this.filterStatus.seatingType.indexOf(seatingType), 1);
+      if(this.filterStatus.seatingTypes.includes(seatingType))
+        this.filterStatus.seatingTypes.splice(this.filterStatus.seatingTypes.indexOf(seatingType), 1);
     }  
-    
-    this.filterBySeatingType(this.filterStatus.seatingType.length == 0 ? this.seatingTypes : this.filterStatus.seatingType);
+    this.filterBusDetails();
+    // this.filterBySeatingType(this.filterStatus.seatingType.length == 0 ? this.seatingTypes : this.filterStatus.seatingType);
+  }
+
+  onPriceRangeChange(maxPrice: string){
+    this.filterStatus.priceRange[1] = Number(maxPrice);
+
+    // this.filterByPrice(this.filterStatus.price[1]);
+    this.filterBusDetails();
   }
 
   filterByBusType(busTypes: string[]){
@@ -153,5 +164,37 @@ export class AvailableBusesComponent implements OnInit {
 
   filterBySeatingType(seatingTypes: string[]){
     this.availableBuses = this.availableBusesResponse.filter(bus => seatingTypes.includes(bus.busDetails.seatingType.seating));
+  }
+
+  filterByPrice(maxPrice: number){
+    this.filterStatus.priceRange[1] = Number(maxPrice);
+    this.availableBuses = this.availableBusesResponse.filter(bus => bus.basePrice <= Number(maxPrice));
+  }
+
+
+  filterBusDetails(){
+    this.availableBuses = this.availableBusesResponse.filter( bus => {
+      return this.isBusTypePresent(bus.busDetails.busType, this.filterStatus.busTypes)
+      && this.isSeatingTypePresent(bus.busDetails.seatingType.seating, this.filterStatus.seatingTypes)
+      && this.isBasePriceInGivenPriceRange(bus.basePrice, this.filterStatus.priceRange);
+    })
+  }
+  
+  isBusTypePresent(buType: string, busTypes: string[]){
+    if(busTypes.length == 0)
+      return true;
+
+    return busTypes.includes(buType);
+  }
+
+  isSeatingTypePresent(seatingType: string, seatingTypes: string[]){
+    if(seatingTypes.length == 0)
+      return true;
+
+    return seatingTypes.includes(seatingType);
+  }
+
+  isBasePriceInGivenPriceRange(basePrice: number, priceRange: number[]){
+    return basePrice >= priceRange[0] && basePrice <= priceRange[1];
   }
 }

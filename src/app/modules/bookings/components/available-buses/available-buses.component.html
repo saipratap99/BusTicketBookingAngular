@@ -53,10 +53,10 @@
                 </div>
                 <div class="border-bottom p-2 col-xl-12 col-6 border-lg-left">
                     <h6 class="mb-3">Price</h6>
-                    <input type="range" name="price" id="price" min="100" max="2000"> 
+                    <input type="range" name="price" id="price" [min]="minPrice" [max]="maxPrice" [value]="maxPrice" (change)="onPriceRangeChange(priceRange.value)" #priceRange [title]="priceRange.value | currency: 'INR'"> 
                     <div class="d-flex justify-content-between">
                         <span class="text-muted small">{{ minPrice | currency: 'INR'}}</span>
-                        <span class="text-muted small">{{ maxPrice | currency: 'INR'}}</span>
+                        <span class="text-muted small">{{ priceRange.value | currency: 'INR'}}</span>
                     </div>
                 </div>
             </div>
