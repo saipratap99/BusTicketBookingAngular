@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -23,5 +23,7 @@ export class NavbarComponent implements OnInit {
   setActive(page: string){
     this.currPage = page;
   }
+
+  
 
 }

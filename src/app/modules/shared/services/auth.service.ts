@@ -44,6 +44,8 @@ export class AuthService {
   }
 
   isLoggedIn(){
+    if(!localStorage.getItem('token'))
+        return false;
     if(!moment().isBefore(this.getExpiration())){
       localStorage.clear()
       this.payLoad = undefined;
