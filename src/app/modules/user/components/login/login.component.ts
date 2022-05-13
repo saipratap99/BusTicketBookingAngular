@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           // console.log(data, JSON.parse(JSON.stringify(data))?.body?.jwt);
           const jwt = JSON.parse(JSON.stringify(data))?.body?.jwt;
-          const refreshToken = JSON.parse(JSON.stringify(data))?.body?.refreshToken;
+          // const refreshToken = JSON.parse(JSON.stringify(data))?.body?.refreshToken;
           // console.log(jwt)
           this.msgCommunicationService.msgEvent.emit({msg: "Welcome back user!", status: "success", show: true})
           if(jwt)
-            this.authService.setSession('Bearer ' + jwt, refreshToken);
+            this.authService.setSession('Bearer ' + jwt);
           this.router.navigate([this.redirectURL]);
           this.loginForm.reset();
         },

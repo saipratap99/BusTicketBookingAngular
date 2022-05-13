@@ -16,16 +16,15 @@ export class AppHttpInterceptor implements HttpInterceptor{
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        // console.log("is expired: ", localStorage.getItem('token') != null && this.authService.isExpired())
-        if(localStorage.getItem('token') != null && this.authService.isExpired())
-            this.refreshAccessToken();
-    
-        console.log("http interceptor")
-
         return next.handle(req).pipe(
             tap(evt => {
                 if(evt instanceof HttpResponse){
-                    if(evt.body && evt.body.success){}
+                    const token = evt.headers.get('Authorization');
+                    if(localStorage.getItem('token') !== token){
+                        if(token != null)
+                            this.authService.setAccessToken(token);
+                    }
+                    
                 }
             }),
             catchError(err => {
@@ -46,17 +45,6 @@ export class AppHttpInterceptor implements HttpInterceptor{
             })
         );
         
-    }
-
-    refreshAccessToken(){
-        console.log("refresh", localStorage.getItem('refreshToken'))
-        this.http.post(`${globalVars.backendAPI}/users/auth/refresh-token/${localStorage.getItem('refreshToken')}`, { refreshToken: localStorage.getItem('refreshToken') })
-            .subscribe({
-                next: (data) => {
-                    console.log(data);
-                    this.authService.setSession(JSON.parse(JSON.stringify(data)).accessToken, JSON.parse(JSON.stringify(data)).refreshToken);
-                }
-            })
     }
     
 }

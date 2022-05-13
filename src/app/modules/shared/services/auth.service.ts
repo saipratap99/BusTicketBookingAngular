@@ -21,15 +21,17 @@ export class AuthService {
     return this.http.post(`${this.url}/login`, model, {observe: 'response'});
   }
 
-  setSession(jwt: string, refreshToken: string){
-    const expiresAt = moment().add(60 * 30, 'second');
+  setSession(jwt: string){
+    const expiresAt = moment().add(60 * 60 * 10, 'second');
 
-    localStorage.setItem('token', jwt);
-    localStorage.setItem('refreshToken', refreshToken);
+    this.setAccessToken(jwt);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
   }
 
-  
+  setAccessToken(jwt: string){
+    console.log("Access token added");
+    localStorage.setItem('token', jwt);
+  }
 
   logOut(){
     if(confirm("Are you sure to logout?")){
