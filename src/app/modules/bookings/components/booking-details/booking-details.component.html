@@ -6,7 +6,7 @@
 <div class="bookings-wrapper d-flex justify-content-center">
     <div *ngIf="allSuccessbookingDetails.length > 0; else noBooking" class="bookings border rounded">    
         <div class="my-4 p-1 border-bottom" *ngFor="let bookingDetails of allSuccessbookingDetails">
-            <div class="d-flex justify-content-between">
+            <div class="px-2 d-flex justify-content-between flex-sm-row flex-column">
                 <h5>Booking Id: {{bookingDetails.id}}</h5>
                 <span>Booked at <strong class="text-success">{{ bookingDetails.bookedAt | date: 'medium' }}</strong></span>
             </div>
