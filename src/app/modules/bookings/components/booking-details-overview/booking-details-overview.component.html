@@ -1,10 +1,10 @@
-<div class="row my-3" *ngIf="bookingDetails">
+<div class="row my-3 mx-0" *ngIf="bookingDetails">
     <div class="col-lg-9 col-12 booking-details-wrapper d-flex justify-content-center my-2">
         <div class="booking-details rounded">
             <div class="trip-details">
                 <h4 class="p-3 review-deatils">Trip Details</h4>
                 <div class="d-flex justify-content-evenly flex-xl-row flex-column">
-                    <div class="deparure-arrival-details d-flex align-items-center">
+                    <div class="deparure-arrival-details d-flex align-items-center flex-sm-row flex-column">
                         <div class="departure-details mx-3">
                             <div class="d-flex align-items-center">
                                 <h4 class="m-2 departure-time">{{ (bookingDetails.doj + ' ' + bookingDetails.time) | date: 'shortTime' }}</h4>    

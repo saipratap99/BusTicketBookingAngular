@@ -14,3 +14,19 @@
 .time{
     width: 400px;
 }
+
+.bus:hover{
+    background-color: #f0eafb;
+}
+
+@media screen and (max-width: 576px) {
+    .bus-name{
+        font-size: 1.05rem;
+        padding: 0 4px;
+        width: 320px;
+    }
+
+    .time{
+        width: auto;
+    }
+}

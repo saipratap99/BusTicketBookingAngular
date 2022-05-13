@@ -1,7 +1,7 @@
 <div class="bookingForm w-80 mx-auto mt-3">
 	<div class="banner d-flex flex-column justify-content-center align-items-center">
 		<h4 class="text-center text-dark">Book Bus Tickets</h4>
-		<form class="row gy-2 gx-3 align-items-center justify-content-center" [formGroup]="form" (ngSubmit)="getBuses()">
+		<form class="row gy-2 gx-3 align-items-center justify-content-center mx-0" [formGroup]="form" (ngSubmit)="getBuses()">
 			<div class="col-md-auto col-9">
 			  <label class="visually-hidden" for="autoSizingInput">Departure location</label>
 			  <input list="departureLocations" class="form-control" id="autoSizingInput" name="depLocation" placeholder="Search Departure location" formControlName="departureLocation" required autocomplete="off">
