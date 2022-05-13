@@ -24,6 +24,48 @@
     </div>
     <!-- <h4 class="text-primary text-center">Available Buses from {{departureLocation.locationName}} to {{arrivalLocation.locationName}} on {{date | date: 'fullDate'}}: </h4> -->
     <div class="row px-3 mx-0">
+        <div class="accordion accordion-flush filter-menu col-xl-2 col-12 border rounded p-1 my-2" id="accordionFlushExample">
+            <div class="accordion-item border-bottom p-2">
+                <div class="accordion-header" id="flush-headingOne">
+                    <button class="acc-button collapsed d-block" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <h5>Filter</h5>
+                        <p class="text-muted small">Showing {{availableBuses.length}} of {{availableBusesResponse.length}} buses </p>
+                    </button>
+                </div>
+            </div>
+            <div id="flush-collapseOne" class="accordion-collapse collapse filter-options row p-2" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="border-xl-bottom border-sm-none border-bottom px-2 col-xl-12 col-sm-6 col-12">
+                    <h6 class="mb-3">Bus Type</h6>
+                    <ul class="list-styling-none">
+                        <li class="d-flex justify-contet-center align-items-center">
+                            <input type="checkbox" name="AC" id="AC" class="m-2" #ac (change)="onBusTypeChange(ac.checked, 'AC')">   
+                            <label for="AC"> AC </label>
+                        </li>
+                        <li class="d-flex justify-contet-center align-items-center">
+                            <input type="checkbox" name="Non-AC" id="Non-AC" class="m-2" #non_ac (change)="onBusTypeChange(non_ac.checked, 'Non-AC')" > 
+                            <label for="Non-AC"> Non-AC </label>
+                        </li>
+                        <li class="d-flex justify-contet-center align-items-center">
+                            <input type="checkbox" name="Sleeper" id="Sleeper" class="m-2" #sleeper (change)="onSeatingTypeChange(sleeper.checked, 'Sleeper')"> 
+                            <label for="Sleeper"> Sleeper </label>
+                        </li>
+                        <li class="d-flex justify-contet-center align-items-center">
+                            <input type="checkbox" name="Semi" id="Semi" class="m-2" #semi_sleeper (change)="onSeatingTypeChange(semi_sleeper.checked, 'Semi Sleeper')"> 
+                            <label for="Semi"> Semi Sleeper </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-sm-bottom border-none p-2 col-xl-12 col-sm-6 col-12 border-lg-left">
+                    <h6 class="mb-3">Price</h6>
+                    <input type="range" name="price" id="price" [min]="minPrice" [max]="maxPrice" [value]="maxPrice" (change)="onPriceRangeChange(priceRange.value)" #priceRange [title]="priceRange.value | currency: 'INR'"> 
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted small">{{ minPrice | currency: 'INR'}}</span>
+                        <span class="text-muted small">{{ priceRange.value | currency: 'INR'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
         <div class="filter-menu col-xl-2 col-12 border rounded p-2">
             <div class="border-bottom p-2">
                 <h5>Filter</h5>
@@ -61,6 +103,7 @@
                 </div>
             </div>
         </div>
+        -->
         <div class="available-buses-list col-xl-10 col-12 my-xl-0 my-2 p-1">
             <div class="bus p-3 border rounded mb-2 d-flex justify-content-evenly align-items-center flex-lg-row flex-column" *ngFor="let bus of availableBuses">
                 <div>

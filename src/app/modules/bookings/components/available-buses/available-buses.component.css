@@ -19,6 +19,13 @@
     background-color: #f0eafb;
 }
 
+.acc-button{
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    text-align: left;
+}
+
 @media screen and (max-width: 576px) {
     .bus-name{
         font-size: 1.05rem;
