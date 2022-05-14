@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { faL } from '@fortawesome/free-solid-svg-icons';
+import { of } from 'rxjs';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { ScheduleService } from '../../services/schedule.service';
 
@@ -92,5 +94,19 @@ export class ScheduleFormComponent implements OnInit {
     }
     
   }
-  
+
+  isValidServiceDeatils(servicDetails: string){
+    for(let service of this.services)
+      if(service.serviceName === servicDetails)
+        return true;
+    return false;
+  }
+
+  isValidBusDetails(busId: number){
+    for(let bus of this.buses)
+      if(bus.id == busId)
+        return true;
+    return false;
+  }
+    
 }

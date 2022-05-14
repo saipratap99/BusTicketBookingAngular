@@ -32,7 +32,7 @@ export class ServiceDetailsFormComponent implements OnInit {
 
   buildForm(){
     this.serviceDetailsForm = new FormGroup({
-      serviceNumber: new FormControl(this.serviceDetails?.serviceNumber, [Validators.required]),
+      serviceNumber: new FormControl(this.serviceDetails?.serviceNumber, [Validators.required, Validators.min(1)]),
       serviceType: new FormControl(this.serviceDetails?.serviceType, [Validators.required, Validators.min(3)]),
       distance: new FormControl(this.serviceDetails?.distance, [Validators.required, Validators.min(10)] ),
       departureLocation: new FormControl(this.serviceDetails?.departureLocation, [Validators.required, Validators.min(3)]),
@@ -71,6 +71,10 @@ export class ServiceDetailsFormComponent implements OnInit {
         complete: () => this.loading = false 
       })
     }
+  }
+
+  isValidServiceType(serviceType: string){
+    return this.serviceTypes.includes(serviceType);
   }
 
 }

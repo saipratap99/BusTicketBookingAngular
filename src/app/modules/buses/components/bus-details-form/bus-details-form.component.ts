@@ -35,8 +35,8 @@ export class BusDetailsFormComponent implements OnInit {
 
   buildForm(){
     this.busDetailsForm = new FormGroup({
-      model: new FormControl(this.busDetails?.model, [Validators.required, Validators.min(2)]),
-      busRegNumber: new FormControl(this.busDetails?.busRegNumber, [Validators.required, Validators.min(10)]),
+      model: new FormControl(this.busDetails?.model, [Validators.required, Validators.minLength(2)]),
+      busRegNumber: new FormControl(this.busDetails?.busRegNumber, [Validators.required, Validators.minLength(10)]),
       busType: new FormControl(this.busDetails?.busType, [Validators.required, Validators.min(3)] ),
       seatCount: new FormControl(this.busDetails?.seatCount, [Validators.required, Validators.min(4)]),
       seatingType: new FormControl(this.busDetails?.seatingType?.seating, [Validators.required, Validators.min(3)]),
@@ -76,6 +76,18 @@ export class BusDetailsFormComponent implements OnInit {
         complete: () => this.loading = false
       })
     }
+  }
+
+  isValidBusType(busType: string){
+    return this.busTypes.includes(busType);
+  }
+
+  isValidSeatingType(seatingType: string){
+    console.log(this.seatingTypes, seatingType);
+    for(let eachSeating of this.seatingTypes)
+      if(eachSeating.seating === seatingType)
+        return true;
+    return false;
   }
 
 }

@@ -1,33 +1,48 @@
-<form class="w-50 mx-auto" [formGroup]="busDetailsForm" (ngSubmit)="onSubmit()">
+<form class="w-50 mx-auto needs-validation" [formGroup]="busDetailsForm" (ngSubmit)="onSubmit()">
     <fieldset>   
           <div class="mb-3">
             <label for="model" class="form-label">Bus Model</label>
-            <input type="text" class="form-control" id="busName" name="model" formControlName="model">
+            <input type="text" class="form-control" id="busName" name="model" formControlName="model" [class.is-invalid]="busDetailsForm.get('model')?.dirty && busDetailsForm.get('model')?.invalid">
+            <div class="invalid-feedback">
+              Bus Model name must be length of 2 atleast  
+            </div>
           </div>
             <div class="grid-row">
               <div class="mb-3">
                 <label for="busRegNumber" class="form-label">Bus Registration Number</label>
-                <input type="text" class="form-control" id="busRegNumber" name="busRegNumber" formControlName="busRegNumber">
+                <input type="text" class="form-control" id="busRegNumber" name="busRegNumber" formControlName="busRegNumber" [class.is-invalid]="busDetailsForm.get('busRegNumber')?.dirty && !busDetailsForm.get('busRegNumber')?.valid">
+                <div class="invalid-feedback">
+                  Invalid Registration Number must be length of 10.
+                </div>
               </div>
               <div class="mb-3">
                 <label for="busType" class="form-label">Bus Type</label>
-                <input list="busTypes" value="" class="col-sm-6 custom-select custom-select-sm form-control" name="busType" formControlName="busType" placeholder="Select Bus Type" autocomplete="off">
+                <input list="busTypes" value="" class="col-sm-6 custom-select custom-select-sm form-control" name="busType" formControlName="busType" [class.is-invalid]="busDetailsForm.get('busType')?.dirty && !isValidBusType(busDetailsForm.get('busType')?.value)" placeholder="Select Bus Type" autocomplete="off">
                 <datalist id="busTypes" *ngIf="busTypes">
                     <option *ngFor="let type of busTypes" [value]="type">
                 </datalist>
+                <div class="invalid-feedback">
+                  Invalid Bus Type must select valid bus type.
+                </div>
               </div>
             </div>
           <div class="grid-row">
               <div class="mb-3">
                 <label for="seatingType" class="form-label">Seating Type</label>
-                <input list="seatingTypes" value="" class="col-sm-6 custom-select custom-select-sm form-control" name="seatingType"  formControlName="seatingType" placeholder="Select Seating Type" autocomplete="off">
+                <input list="seatingTypes" value="" class="col-sm-6 custom-select custom-select-sm form-control" name="seatingType"  formControlName="seatingType" [class.is-invalid]="busDetailsForm.get('seatingType')?.dirty && !isValidSeatingType(busDetailsForm.get('seatingType')?.value)" placeholder="Select Seating Type" autocomplete="off">
                 <datalist id="seatingTypes" *ngIf="seatingTypes">
                     <option *ngFor="let type of seatingTypes" [value]="type.seating" >
                 </datalist>
+                <div class="invalid-feedback">
+                  Invalid Seating Type must select valid seating type.
+                </div>
               </div>
               <div class="mb-3">
                 <label for="seatCount" class="form-label">Seating Count</label>
-                <input type="number" class="form-control" id="seatCount" name="seatCount"  formControlName="seatCount">
+                <input type="number" class="form-control" id="seatCount" name="seatCount"  formControlName="seatCount" [class.is-invalid]="busDetailsForm.get('seatCount')?.dirty && busDetailsForm.get('seatCount')?.invalid">
+                <div class="invalid-feedback">
+                  Must have min of 10 seats
+                </div>
               </div>
           </div>
           <div class="grid-row">
@@ -41,7 +56,7 @@
               </div>	
           </div>
           <div *ngIf="!disabled">
-            <button type="submit" class="btn btn-primary" [disabled]="!busDetailsForm.valid" [disabled]="loading">
+            <button type="submit" class="btn btn-primary" [disabled]="busDetailsForm.invalid || loading || !busDetailsForm.dirty" >
               <span *ngIf="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               </span>

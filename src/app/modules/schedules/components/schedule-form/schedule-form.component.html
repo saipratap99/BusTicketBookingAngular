@@ -2,18 +2,24 @@
     <fieldset>
         <div class="mb-3">
             <label for="serviceDetails" class="form-label">Service Details</label>
-            <input list="serviceDetails" class="col-sm-6 custom-select custom-select-sm form-control" name="service" formControlName="serviceName" placeholder="Select Service" autocomplete="off">
+            <input list="serviceDetails" class="col-sm-6 custom-select custom-select-sm form-control" name="service" formControlName="serviceName" [class.is-invalid]="scheduleDetailsForm.get('serviceName')?.dirty && !isValidServiceDeatils(scheduleDetailsForm.get('serviceName')?.value)" placeholder="Select Service" autocomplete="off">
             <datalist id="serviceDetails" *ngIf="services">
                 <option *ngFor="let service of services" [value]="service.serviceName">
             </datalist>
+            <div class="invalid-feedback">
+                Invalid Service Details. Must select from given details.
+            </div>
         </div>
 
         <div class="mb-3">
             <label for="busDetails" class="form-label">Bus Details</label>
-            <input list="busDetails" class="col-sm-6 custom-select custom-select-sm form-control" name="bus" formControlName="busId" placeholder="Select bus" autocomplete="off">
+            <input list="busDetails" class="col-sm-6 custom-select custom-select-sm form-control" name="bus" formControlName="busId" [class.is-invalid]="scheduleDetailsForm.get('busId')?.dirty && !isValidBusDetails(scheduleDetailsForm.get('busId')?.value)" placeholder="Select bus" autocomplete="off">
             <datalist id="busDetails" *ngIf="buses">
                 <option *ngFor="let bus of buses" [value]="bus.id"> {{ bus.busName }}</option>
             </datalist>
+            <div class="invalid-feedback">
+                Invalid Bus Details. Must select from given Buses.
+            </div>
         </div>
             
         <!--  
@@ -32,10 +38,13 @@
         
         <div class="mb-3">
             <label for="week" class="form-label">Week Day</label>
-            <input list="weeks" class="col-sm-6 custom-select custom-select-sm form-control" name="week" formControlName="weekDay" placeholder="Select week" autocomplete="off">
+            <input list="weeks" class="col-sm-6 custom-select custom-select-sm form-control" name="week" formControlName="weekDay" [class.is-invalid]="scheduleDetailsForm.get('weekDay')?.dirty && scheduleDetailsForm.get('weekDay')?.invalid" placeholder="Select week" autocomplete="off">
             <datalist id="weeks" *ngIf="weeks">
                 <option *ngFor="let week of weeks; let i = index" [value]="i+1">{{ week }}</option>
             </datalist>
+            <div class="invalid-feedback">
+                Week must be between 1(Sunday) and 7(Saturday)
+            </div>
         </div>
        
         <div class="grid-row">
@@ -52,7 +61,10 @@
         
         <div class="mb-3">
             <label for="basePrice" class="form-label">Base price</label>
-            <input type="number" class="form-control" id="basePrice" name="basePrice" formControlName="basePrice">
+            <input type="number" class="form-control" id="basePrice" name="basePrice" formControlName="basePrice" [class.is-invalid]="scheduleDetailsForm.get('basePrice')?.dirty && scheduleDetailsForm.get('basePrice')?.invalid">
+            <div class="invalid-feedback">
+                Base price must be atleast {{  30 | currency: 'INR' }}.
+            </div>
         </div>
         
         <div *ngIf="!disabled">

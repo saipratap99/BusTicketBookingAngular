@@ -3,14 +3,20 @@
         <div class="grid-row">
             <div class="mb-3 grid-col">
                 <label for="serviceNumber" class="form-label">Service Number</label>
-                <input type="text" class="form-control" id="serviceNumber" name="serviceNumber" formControlName="serviceNumber" autocomplete="off">
+                <input type="number" class="form-control" id="serviceNumber" name="serviceNumber" formControlName="serviceNumber" [class.is-invalid]="serviceDetailsForm.get('serviceNumber')?.dirty && serviceDetailsForm.get('serviceNumber')?.invalid" autocomplete="off">
+                <div class="invalid-feedback">
+                    Service number must be min of 1.
+                </div>
             </div>
             <div class="mb-3 grid-col">
                 <label for="serviceType" class="form-label">Service Type</label>
-                <input list="serviceTypes" class="form-control" id="serviceType" name="serviceType" formControlName="serviceType" autocomplete="off" placeholder="Select service type">
+                <input list="serviceTypes" class="form-control" id="serviceType" name="serviceType" formControlName="serviceType" [class.is-invalid]="serviceDetailsForm.get('serviceType')?.dirty && !isValidServiceType(serviceDetailsForm.get('serviceType')?.value)" autocomplete="off" placeholder="Select service type">
                 <datalist id="serviceTypes" *ngIf="serviceTypes">
                     <option *ngFor="let type of serviceTypes" [value]="type">
                 </datalist>
+                <div class="invalid-feedback">
+                    Invalid Service type must select from given service types.
+                </div>
             </div>
         </div>
         <div class="grid-row departure">      
@@ -20,6 +26,10 @@
                 <datalist id="depLocations" *ngIf="locations">
                     <option *ngFor="let location of locations" [value]="location.locationName">
                 </datalist>
+                <div class="invalid-feedback">
+                    Invalid departure location. Must select from given locations.
+                </div>
+
             </div>                
         </div>
         <div class="grid-row arrival">
@@ -29,11 +39,17 @@
                 <datalist id="arrLocations" *ngIf="locations">
                     <option *ngFor="let location of locations" [value]="location.locationName">
                 </datalist>
+                <div class="invalid-feedback">
+                    Invalid arrival location. Must select from given locations.
+                </div>
             </div>
         </div>
         <div class="mb-3">
             <label for="distance" class="form-label">Distance</label>
-            <input type="number" class="form-control" id="distance" name="distance" formControlName="distance" autocomplete="off">
+            <input type="number" class="form-control" id="distance" name="distance" formControlName="distance" [class.is-invalid]="serviceDetailsForm.get('distance')?.dirty && serviceDetailsForm.get('distance')?.invalid" autocomplete="off">
+            <div class="invalid-feedback">
+                Distance must be atleast of 10 Kms.
+            </div>
         </div>			  
         <div *ngIf="!disabled">
             <button type="submit" class="btn btn-primary" [disabled]="!serviceDetailsForm.valid" [disabled]="loading">
