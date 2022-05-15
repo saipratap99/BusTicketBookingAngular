@@ -34,10 +34,10 @@ export class SignupComponent implements OnInit {
         .subscribe({
           next: (v) => {
             console.log(v);
-            this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(v)).firstName + ' has been added!', status: 'success', show: true});
+            this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(v)).firstName + ', please verify email.', status: 'success', show: true});
             this.userForm.reset();
-            if(this.redirectURL)
-              this.router.navigate([this.redirectURL]);
+            
+            this.router.navigate([`users/${JSON.parse(JSON.stringify(v)).id}/verify/otp`]);
           },
 
           error: (err) => {

@@ -1,0 +1,45 @@
+<app-banner></app-banner>
+<h4 class="heading">
+    Verify Email
+</h4>
+<div class="userForm-wrapper d-flex justify-content-center" *ngIf="email">
+    <div class="userForm flex-lg-row flex-column d-flex justify-content-center align-items-center border rounded p-3">
+        <div class="login-img d-none d-lg-block">
+            <img src="/assets/images/login-rebbeca.svg" alt="" class="img-fluid">
+        </div>
+        <form #verifyOTPForm="ngForm" class="w-50">
+            <fieldset>
+                <div>
+                    <p class="text-center" *ngIf="redirectURL">
+                        Email sent to {{ email }} <br><a [routerLink]="['/users/new']" [queryParams]="{redirectURL: redirectURL}">Click here </a>If email is wrong.
+                    </p>
+                    <p class="text-center" *ngIf="!redirectURL">
+                        Email sent to <span class="email">{{email}}</span> <br><a [routerLink]="['/users/new']">Click here </a>If email is wrong.
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label for="number" class="form-label">OTP</label>
+                    <input type="number" class="form-control" name="password" id="password" [(ngModel)]="otp" required>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="mx-2">
+                        <button type="submit" class="btn btn-primary form-control" [disabled]="!verifyOTPForm.valid" [disabled]="loading" (click)="onVerify()">
+                            <span *ngIf="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </span>
+                            {{ loading ? 'Verifying..' : 'Verify'}}
+                        </button>
+                    </div>
+                    <div class="mx-2">
+                        <button type="submit" class="btn btn-dark form-control" [disabled]="!verifyOTPForm.valid" [disabled]="loading" (click)="onResend()">
+                            <span *ngIf="loading">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </span>
+                            {{ loading ? 'Sending..' : 'Resend'}}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -8,13 +8,15 @@ import { LoginComponent } from './components/login/login.component';
 import { ToastBarComponent } from '../shared/components/toast-bar/toast-bar.component';
 import { SharedModule } from '../shared/shared.module';
 import { UsersIndexComponent } from './components/users-index/users-index.component';
+import { VerifyOtpComponent } from './components/verify-otp/verify-otp.component';
 
 
 @NgModule({
   declarations: [
     SignupComponent,
     LoginComponent,
-    UsersIndexComponent
+    UsersIndexComponent,
+    VerifyOtpComponent
   ],
   imports: [
     CommonModule,

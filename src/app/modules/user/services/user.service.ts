@@ -34,4 +34,11 @@ export class UserService {
     return this.http.post(`${this.url}/${id}/alter-role?operatorName=${operator}`,{});
   }
 
+  getEmail(id: number){
+    return this.http.get(`${this.url}/${id}/email`);
+  }
+
+  verifyOTP(id: number, otp: number){
+    return this.http.post(`${this.url}/${id}/verify/otp/${otp}`,{});
+  }
 }

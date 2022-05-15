@@ -1,0 +1,24 @@
+.heading{
+    text-align: center;
+    z-index: 10;
+    color: white;
+    margin-top: 20px;
+}
+
+.userForm-wrapper{
+    width: 100%;
+}
+
+.userForm{
+    width: 95%;
+    background-color: white;
+    margin-top: 30px;
+}
+
+.login-img img{
+    width: 70%;
+}
+
+.email{
+    color: rebeccapurple;
+}
