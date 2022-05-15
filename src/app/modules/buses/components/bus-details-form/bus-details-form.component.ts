@@ -83,7 +83,6 @@ export class BusDetailsFormComponent implements OnInit {
   }
 
   isValidSeatingType(seatingType: string){
-    console.log(this.seatingTypes, seatingType);
     for(let eachSeating of this.seatingTypes)
       if(eachSeating.seating === seatingType)
         return true;

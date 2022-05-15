@@ -34,9 +34,8 @@ export class AuthService {
   }
 
   logOut(){
-    if(confirm("Are you sure to logout?")){
-      this.clearSession();
-    }
+    this.clearSession();
+    return this.http.post(`${this.url}/logout`,{});
   }
 
   clearSession(){
