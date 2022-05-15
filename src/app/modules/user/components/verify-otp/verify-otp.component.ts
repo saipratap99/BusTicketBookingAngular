@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { tick } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faL } from '@fortawesome/free-solid-svg-icons';
+import { timer } from 'rxjs';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { UserService } from '../../services/user.service';
 
@@ -18,6 +19,11 @@ export class VerifyOtpComponent implements OnInit {
   loading: boolean = false;
   otp!: number;
   redirectURL: string = '';
+  isResendDisabled: boolean = true; 
+  
+  // remainingTime: number = Math.floor(this.ticks / 1000);
+  
+
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private msgCommunicationService: MsgCommunicationService) {
     
@@ -27,6 +33,7 @@ export class VerifyOtpComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.id = Number(params.get('id'));
       this.fetchEmail();
+      this.disableResend();
     })
   }
 
@@ -52,7 +59,20 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onResend(){
+    this.userService.resendOTP(this.id).subscribe({
+      next: (data) => {
+        this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(data)).msg, status: 'success', show: true});
+        this.isResendDisabled = true;
+        this.disableResend();
+      }
+    })
+    
+  }
 
+  disableResend(){
+    setTimeout(() => {
+      this.isResendDisabled = false;
+    }, 60000);
   }
 
 

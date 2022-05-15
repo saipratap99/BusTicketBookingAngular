@@ -41,4 +41,8 @@ export class UserService {
   verifyOTP(id: number, otp: number){
     return this.http.post(`${this.url}/${id}/verify/otp/${otp}`,{});
   }
+
+  resendOTP(id: number){
+    return this.http.get(`${this.url}/${id}/resend/otp`);
+  }
 }
