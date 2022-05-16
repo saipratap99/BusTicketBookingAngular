@@ -31,11 +31,11 @@
                         </button>
                     </div>
                     <div class="mx-2">
-                        <button type="submit" class="btn btn-dark form-control" [disabled]="isResendDisabled"  (click)="onResend()">
-                            <span *ngIf="loading">
+                        <button type="submit" class="btn btn-dark form-control" [disabled]="isResendDisabled || resendLoading" (click)="onResend()">
+                            <span *ngIf="resendLoading">
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             </span>
-                            {{ loading ? 'Sending..' : 'Resend' }} <!--<span *ngIf="remainingTime > 0"> {{' in ' + remainingTime + ' s' }}</span>--> 
+                            {{ resendLoading ? 'Sending..' : 'Resend' }} <span *ngIf="remainingTime > 0"> {{' in ' + remainingTime + ' s' }}</span> 
                         </button>
                     </div>
                 </div>

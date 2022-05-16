@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { tick } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
@@ -20,9 +19,8 @@ export class VerifyOtpComponent implements OnInit {
   otp!: number;
   redirectURL: string = '';
   isResendDisabled: boolean = true; 
-  
-  // remainingTime: number = Math.floor(this.ticks / 1000);
-  
+  remainingTime: number = 60;
+  resendLoading: boolean = false;
 
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private msgCommunicationService: MsgCommunicationService) {
@@ -59,19 +57,25 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   onResend(){
+    this.resendLoading = true;
     this.userService.resendOTP(this.id).subscribe({
       next: (data) => {
         this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(data)).msg, status: 'success', show: true});
         this.isResendDisabled = true;
         this.disableResend();
-      }
+      },
+      complete: () => this.resendLoading = false
     })
     
   }
 
   disableResend(){
+    this.remainingTime = 60;
+    let timerSubscriber = timer(1000, 1000).subscribe(() => this.remainingTime--);
+
     setTimeout(() => {
       this.isResendDisabled = false;
+      timerSubscriber.unsubscribe();
     }, 60000);
   }
 
