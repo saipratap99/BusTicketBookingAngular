@@ -1,6 +1,6 @@
 <div class="bookingForm w-80 mx-auto mt-3">
 	<div class="banner d-flex flex-column justify-content-center align-items-center">
-		<h4 class="text-center text-dark">Book Bus Tickets</h4>
+		<h4 class="text-center text-dark mb-3">Book Bus Tickets</h4>
 		<form class="row gy-2 gx-3 align-items-center justify-content-center mx-0" [formGroup]="form" (ngSubmit)="getBuses()">
 			<div class="col-md-auto col-9">
 			  <label class="visually-hidden" for="autoSizingInput">Departure location</label>
@@ -23,7 +23,15 @@
 			<div class="col-md-auto col-9 text-center">
 			  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Search</button>
 			</div>
-		  </form>
+		</form>
+		<div class="my-3 d-md-flex flex-column align-items-center d-none">
+			<div><h6>Popular Searches</h6></div>
+			<div class="badge rounded-pill popular-search-badge" (click)="autoFillLocations('Hyderabad', 'Vijayawada') ">
+				<span>Hyderabad</span>
+				to
+				<span>Vijayawada</span>
+			</div>			
+		</div>
 	</div>
 </div>
 

@@ -5,3 +5,8 @@
     background-position-x: center;
     background-position-y: center;
 }
+
+.popular-search-badge{
+    background-color: #935bcb;
+    cursor: pointer;
+}

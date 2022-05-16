@@ -98,6 +98,11 @@ export class SearchBusesComponent implements OnInit {
     else if(this.arrivalLocations.length != 1)
       this.msgCommunicationService.msgEvent.emit({msg: "Invalid arrival location", status: "danger", show: true});
   }
+
+  autoFillLocations(departureLocation: string, arrivalLocation: string){
+    this.form.get('departureLocation')?.setValue(departureLocation);
+    this.form.get('arrivalLocation')?.setValue(arrivalLocation);
+  }
 }
 
 
