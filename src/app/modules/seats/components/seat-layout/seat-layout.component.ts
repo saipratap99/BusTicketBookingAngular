@@ -43,7 +43,6 @@ export class SeatLayoutComponent implements OnInit {
         },
         error: (err) => {
           this.msgCommunicationService.msgEvent.emit({msg: err.error.msg, status: "danger", show: true});
-          // this.router.navigate(['/']);
         }
     })
 
@@ -55,6 +54,7 @@ export class SeatLayoutComponent implements OnInit {
       if(!this.seatsByRow.has(seat.seatRow))
         this.seatsByRow.set(seat.seatRow,[]);
 
+      // adds empty seat / object  
       if(seat.seatCol != this.seatsByRow.get(seat.seatRow).length + 1)
         this.seatsByRow.get(seat.seatRow).push({});
       this.seatsByRow.get(seat.seatRow).push(seat);

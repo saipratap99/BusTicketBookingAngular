@@ -18,9 +18,9 @@
                 </div>
                 <!-- Seats -->
                 <div class="d-inline-block">
-                    <div *ngFor="let col of cols.reverse()" class="d-flex justify-content-end">
+                    <div *ngFor="let col of cols" class="d-flex justify-content-end">
                         <div *ngFor="let row of rows">
-                            <div *ngIf="seatsByRow.get(row)[col-1]; let seat">
+                            <div *ngIf="seatsByRow.get(row)[maxCols - col - 1]; let seat">
                                 <div *ngIf="seat.seatCol != undefined; else noSeat">
                                     <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked)" #checkbox [disabled]="seat.booked"/>  
                                     <label class="seat small" [for]="seat.seatName" [class.booked]="seat.booked" [class.sleeper]="seat?.seatingType?.includes('Sleeper')">{{seat.seatName}}</label>

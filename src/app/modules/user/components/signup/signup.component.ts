@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
-
 import { Signup } from '../../models/signup.model';
 import { UserService } from '../../services/user.service';
 
@@ -16,6 +15,7 @@ export class SignupComponent implements OnInit {
   model: Signup = new Signup();
   loading: boolean = false;
   redirectURL!: string | null;
+  
 
   constructor(private userService: UserService, private msgCommunicationService: MsgCommunicationService, private route: ActivatedRoute, private router: Router) { }
 
@@ -24,6 +24,11 @@ export class SignupComponent implements OnInit {
       this.redirectURL = params.get('redirectURL') != null ? params.get('redirectURL') : '';;    
       console.log( this.redirectURL)
     })
+
+    // this.socialAuthService.authState.subscribe((user) => {
+    //   this.socialUser = user;
+    //   console.log(this.socialUser);
+    // });
   }
 
   onSubmit(){
@@ -51,4 +56,8 @@ export class SignupComponent implements OnInit {
         })
     }
   } 
+
+  // loginWithGoogle(){
+  //   this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  // }
 }
