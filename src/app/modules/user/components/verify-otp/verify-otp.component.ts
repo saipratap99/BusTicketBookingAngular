@@ -17,10 +17,10 @@ export class VerifyOtpComponent implements OnInit {
   email!: string | null; 
   loading: boolean = false;
   otp!: number;
-  redirectURL: string = '';
   isResendDisabled: boolean = true; 
   remainingTime: number = 60;
   resendLoading: boolean = false;
+  redirectURL: string | null = 'users/login';
 
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private msgCommunicationService: MsgCommunicationService) {
@@ -28,6 +28,11 @@ export class VerifyOtpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.route.queryParamMap.subscribe(params => {
+      this.redirectURL = params.get('redirectURL') != null ? params.get('redirectURL') : this.redirectURL;
+    })
+
     this.route.paramMap.subscribe((params) => {
       this.id = Number(params.get('id'));
       this.fetchEmail();

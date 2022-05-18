@@ -14,14 +14,14 @@ export class SignupComponent implements OnInit {
   @ViewChild('userform') userForm: any;
   model: Signup = new Signup();
   loading: boolean = false;
-  redirectURL!: string | null;
+  redirectURL: string | null= '/users/login';
   
 
   constructor(private userService: UserService, private msgCommunicationService: MsgCommunicationService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
-      this.redirectURL = params.get('redirectURL') != null ? params.get('redirectURL') : '';;    
+      this.redirectURL = params.get('redirectURL') != null ? params.get('redirectURL') : this.redirectURL;
       console.log( this.redirectURL)
     })
 
@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
             this.msgCommunicationService.msgEvent.emit({msg: JSON.parse(JSON.stringify(v)).firstName + ', please verify email.', status: 'success', show: true});
             this.userForm.reset();
             
-            this.router.navigate([`users/${JSON.parse(JSON.stringify(v)).id}/verify/otp`]);
+            this.router.navigate([`users/${JSON.parse(JSON.stringify(v)).id}/verify/otp`], { queryParams: { redirectURL: this.redirectURL} });
           },
 
           error: (err) => {
