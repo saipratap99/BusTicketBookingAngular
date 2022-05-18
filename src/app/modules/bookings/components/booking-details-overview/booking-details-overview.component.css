@@ -12,6 +12,7 @@
 .departure-time{
     /* color: #742525e6; */
     color: #380d80;
+    white-space: nowrap;
 }
 
 .departure-location{
