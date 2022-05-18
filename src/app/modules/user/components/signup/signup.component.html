@@ -8,7 +8,7 @@
         <div class="login-img d-none d-lg-block">
             <img src="/assets/images/login-rebbeca.svg" alt="" class="img-fluid">
         </div>
-        <form #userform="ngForm" (ngSubmit)="onSubmit()" class="w-50">
+        <form #userform="ngForm" (ngSubmit)="onSubmit()" class="col-lg-5 col-md-8 col-10">
             <fieldset>
                 <div>
                     <p class="text-center">Existing User? <a routerLink="/users/login">Login Here</a></p>
@@ -16,22 +16,34 @@
     
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" minlength="3" required>
+                    <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" minlength="3" required [class.is-invalid]="userform.form.get('firstName')?.dirty && !userform.form.get('firstName')?.valid">
+                    <div class="invalid-feedback">
+                        Invalid first name. Must be atleast of 3 letters
+                    </div>
                 </div>
-                
+            
                 <div class="mb-3">
                     <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName" minlength="2" #lastName="ngModel" required>
+                    <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName" minlength="2" #lastName="ngModel" required [class.is-invalid]="userform.form.get('lastName')?.dirty && !userform.form.get('lastName')?.valid">
+                    <div class="invalid-feedback">
+                        Invalid first name. Must be atleast of 2 letters
+                    </div>
                 </div>
                 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" pattern="[^@]+@[^@]+" required>
+                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" pattern="[^@]+@[^@]+" required [class.is-invalid]="userform.form.get('email')?.dirty && !userform.form.get('email')?.valid">
+                    <div class="invalid-feedback">
+                        Invalid email
+                    </div>
                 </div>
                 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" [(ngModel)]="model.password" minlength="5" required>
+                    <input type="password" class="form-control" name="password" id="password" [(ngModel)]="model.password" minlength="5" required [class.is-invalid]="userform.form.get('password')?.dirty && !userform.form.get('password')?.valid">
+                    <div class="invalid-feedback">
+                        Password must be atleast 5 characters.
+                    </div>
                 </div>
                 
                 <div class="mb-3">

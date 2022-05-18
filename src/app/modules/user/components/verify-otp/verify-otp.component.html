@@ -7,14 +7,16 @@
         <div class="login-img d-none d-lg-block">
             <img src="/assets/images/login-rebbeca.svg" alt="" class="img-fluid">
         </div>
-        <form #verifyOTPForm="ngForm" class="w-50">
+        <form #verifyOTPForm="ngForm" class="col-lg-5 col-md-8 col-10">
             <fieldset>
                 <div>
                     <p class="text-center" *ngIf="redirectURL">
                         Email sent to {{ email }} <br><a [routerLink]="['/users/new']" [queryParams]="{redirectURL: redirectURL}">Click here </a>If email is wrong.
                     </p>
                     <p class="text-center" *ngIf="!redirectURL">
-                        Email sent to <span class="email">{{email}}</span> <br><a [routerLink]="['/users/new']">Click here </a>If email is wrong.
+                        Email sent to &nbsp;
+                        <b class="email">{{email}}</b>
+                        <br><a [routerLink]="['/users/new']">Click here </a>If email is wrong.
                     </p>
                 </div>
                 <div class="mb-3">
