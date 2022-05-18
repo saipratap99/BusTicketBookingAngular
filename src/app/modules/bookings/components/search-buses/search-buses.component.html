@@ -18,7 +18,7 @@
 			</div>
 			<div class="col-md-auto col-9">
 			  <label class="visually-hidden" for="autoSizingInputGroup">Choose date</label>
-			  <input type="date" class="form-control" id="autoSizingInputGroup" name="date" formControlName="date" placeholder="Select Date" required>
+			  <input type="date" class="form-control" id="autoSizingInputGroup" name="date" formControlName="date" placeholder="Select Date" required [min]="currDate | date: 'YYYY-MM-dd'" [max]="maxDate | date: 'YYYY-MM-dd'">
 			</div>
 			<div class="col-md-auto col-9 text-center">
 			  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Search</button>

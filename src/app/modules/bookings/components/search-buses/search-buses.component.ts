@@ -22,11 +22,16 @@ export class SearchBusesComponent implements OnInit {
 
   departureLocations!: any[]; 
   arrivalLocations!: any[];
-  date!: string | null
+  date!: string | null;
+  currDate:Date = new Date();
+  maxDate: Date = new Date();
 
   constructor(private bookingService: BookingService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
+
+    this.maxDate.setDate(this.currDate.getDate() + 30);
+
     this.form = new FormGroup({
       departureLocation: new FormControl(""),
       arrivalLocation: new FormControl(""),
@@ -103,6 +108,8 @@ export class SearchBusesComponent implements OnInit {
     this.form.get('departureLocation')?.setValue(departureLocation);
     this.form.get('arrivalLocation')?.setValue(arrivalLocation);
   }
+
+  
 }
 
 
