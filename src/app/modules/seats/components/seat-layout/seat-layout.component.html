@@ -22,13 +22,13 @@
                         <div *ngFor="let row of rows">
                             <div *ngIf="seatsByRow.get(row)[maxCols - col]; let seat">
                                 <div *ngIf="seat.seatCol != undefined; else noSeat">
-                                    <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked)" #checkbox [disabled]="seat.booked"/>  
+                                    <input class="seat-checkbox" type="checkbox" [id]="seat.seatName" (change)="onChange(seat.seatId, checkbox.checked, seat.seatRow, seat.seatCol)" #checkbox [disabled]="seat.booked" [checked]="false"/>  
                                     <label class="seat small" [for]="seat.seatName" [class.booked]="seat.booked" [class.sleeper]="seat?.seatingType?.includes('Sleeper')">{{seat.seatName}}</label>
                                 </div> 
                                 <ng-template #noSeat>
                                     <div class="seat no-seat"></div>
                                 </ng-template>
-        
+
                             </div>
                         </div>
                     </div>    

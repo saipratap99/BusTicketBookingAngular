@@ -51,6 +51,9 @@ export class SeatLayoutComponent implements OnInit {
   seperateSeatsByRows(){
     this.seatsByRow = new Map();
     for(let seat of this.seats){
+      
+      seat.isSelected = false;
+      
       if(!this.seatsByRow.has(seat.seatRow))
         this.seatsByRow.set(seat.seatRow,[]);
 
@@ -72,10 +75,19 @@ export class SeatLayoutComponent implements OnInit {
     console.log(this.seatsByRow, this.maxRows, this.maxCols);
   }
 
-  onChange(seatId: any, isChecked: boolean ){
-    if(isChecked)
-      this.seatsSelected.push(seatId);
-    else{
+  onChange(seatId: any, isChecked: boolean, seatRow: number, seatCol: number){
+    if(isChecked){
+      let seat = this.seatsByRow.get(seatRow)[seatCol - 1];
+      if(this.seatsSelected.length > 5){
+        this.msgCommunicationService.msgEvent.emit({msg: 'You can select maximum of 6 seats', status: 'danger', show: true});
+        let checkBox = document.querySelector(`#${seat?.seatName}`) as HTMLInputElement;
+        if(checkBox)
+          checkBox.checked = false;
+      }else{
+        this.seatsSelected.push(seatId);
+        seat.isSelected = true;
+      }
+    }else{
       let index = this.seatsSelected.indexOf(seatId);
       if(index >= 0)
         this.seatsSelected.splice(index, 1);
@@ -113,5 +125,6 @@ export class SeatLayoutComponent implements OnInit {
   getAvailableSeatCount(){
     this.availableSeats = this.seats.reduce((prevValue, seat) => prevValue += seat.booked ? 0 : 1, 0);
   }
+
 }
 
