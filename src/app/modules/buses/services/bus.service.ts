@@ -29,4 +29,8 @@ export class BusService {
   getAllBusDetails(){
     return this.http.get<any[]>(`${this.url}/bus_details/`);
   }
+
+  deleteBus(id: number){
+    return this.http.delete(`${this.url}/bus_details/${id}`);
+  }
 }

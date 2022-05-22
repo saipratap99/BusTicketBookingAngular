@@ -10,6 +10,7 @@ import { BusDetailsFormComponent } from './components/bus-details-form/bus-detai
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BusService } from './services/bus.service';
+import { DeleteBusComponent } from './components/delete-bus/delete-bus.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { BusService } from './services/bus.service';
     BusIndexComponent,
     ShowBusComponent,
     UpdateBusComponent,
-    BusDetailsFormComponent
+    BusDetailsFormComponent,
+    DeleteBusComponent
   ],
   imports: [
     CommonModule,

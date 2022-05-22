@@ -6,9 +6,15 @@
 <div class="bookings-wrapper d-flex justify-content-center">
     <div *ngIf="allSuccessbookingDetails.length > 0; else noBooking" class="bookings border rounded">    
         <div class="my-4 p-1 border-bottom" *ngFor="let bookingDetails of allSuccessbookingDetails">
-            <div class="px-2 d-flex justify-content-between flex-sm-row flex-column">
-                <h5>Booking Id: {{bookingDetails.id}}</h5>
-                <span>Booked at <strong class="text-success">{{ bookingDetails.bookedAt | date: 'medium' }}</strong></span>
+            <div class="d-flex flex-column">
+                <div class="px-2 d-flex justify-content-between flex-sm-row flex-column">
+                    <h5>Booking Id: {{bookingDetails.id}}</h5>
+                    <span>Booked at <strong [class.text-success]="bookingDetails.status == 'SUCCESS'" [class.text-danger]="bookingDetails.status == 'CANCELED'">{{ bookingDetails.bookedAt | date: 'medium' }}</strong></span>
+                </div>
+                <div class="px-2 d-flex justify-content-between flex-sm-row flex-column">
+                    <h6 [class.text-success]="bookingDetails.status == 'SUCCESS'" [class.text-danger]="bookingDetails.status == 'CANCELED'">{{ bookingDetails.status }}</h6>
+                    <div *ngIf="bookingDetails.cancellationFeedback != null" class="text-warning">{{ bookingDetails.cancellationFeedback }}</div>
+                </div>
             </div>
             <app-booking-details-overview [bookingDetails]="bookingDetails"></app-booking-details-overview>
         </div>
