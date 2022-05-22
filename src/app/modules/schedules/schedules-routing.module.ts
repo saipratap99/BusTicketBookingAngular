@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/guard/auth.guard';
+import { DeleteScheduleComponent } from './components/delete-schedule/delete-schedule.component';
 import { NewScheduleComponent } from './components/new-schedule/new-schedule.component';
 import { ScheduleIndexComponent } from './components/schedule-index/schedule-index.component';
 import { ShowScheduleComponent } from './components/show-schedule/show-schedule.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: '', component: ScheduleIndexComponent, canActivate: [AuthGuard] },
   { path: 'new', component: NewScheduleComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: UpdateScheduleComponent, canActivate: [AuthGuard] },
-  { path: 'show/:id', component: ShowScheduleComponent, canActivate: [AuthGuard] }
+  { path: 'show/:id', component: ShowScheduleComponent, canActivate: [AuthGuard] },
+  { path: 'delete/:id', component: DeleteScheduleComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

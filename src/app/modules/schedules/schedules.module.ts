@@ -10,6 +10,7 @@ import { UpdateScheduleComponent } from './components/update-schedule/update-sch
 import { ScheduleService } from './services/schedule.service';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteScheduleComponent } from './components/delete-schedule/delete-schedule.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ScheduleIndexComponent,
     ScheduleFormComponent,
     ShowScheduleComponent,
-    UpdateScheduleComponent
+    UpdateScheduleComponent,
+    DeleteScheduleComponent
   ],
   imports: [
     CommonModule,

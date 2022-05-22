@@ -35,4 +35,8 @@ export class ScheduleService {
   getAllScheduleDetails(){
     return this.http.get<any[]>(`${this.url}/schedule/`);
   }
+
+  deleteSchedule(id: number){
+    return this.http.delete(`${this.url}/schedule/${id}`);
+  }
 }
