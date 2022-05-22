@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/guard/auth.guard';
+import { DeleteServiceDetailsComponent } from './components/delete-service-details/delete-service-details.component';
 import { NewServiceDetailsComponent } from './components/new-service-details/new-service-details.component';
 import { ServiceDetailsIndexComponent } from './components/service-details-index/service-details-index.component';
 import { ShowServiceDetailsComponent } from './components/show-service-details/show-service-details.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: '', component: ServiceDetailsIndexComponent, canActivate: [AuthGuard] },
   { path: 'new', component: NewServiceDetailsComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: UpdateServiceDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'show/:id', component: ShowServiceDetailsComponent, canActivate: [AuthGuard] }
+  { path: 'show/:id', component: ShowServiceDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'delete/:id', component: DeleteServiceDetailsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

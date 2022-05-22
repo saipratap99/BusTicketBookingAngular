@@ -9,6 +9,7 @@ import { ServiceDetailsFormComponent } from './components/service-details-form/s
 import { ServiceDetailsIndexComponent } from './components/service-details-index/service-details-index.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteServiceDetailsComponent } from './components/delete-service-details/delete-service-details.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UpdateServiceDetailsComponent,
     ServiceDetailsFormComponent,
     ServiceDetailsIndexComponent,
+    DeleteServiceDetailsComponent,
   ],
   imports: [
     CommonModule,

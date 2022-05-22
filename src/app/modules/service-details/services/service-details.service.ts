@@ -31,4 +31,8 @@ export class ServiceDetailsService {
   getAllServiceDetails(){
     return this.http.get<any[]>(`${this.url}/service_details/`);
   }
+
+  deleteService(id: number){
+    return this.http.delete(`${this.url}/service_details/${id}`);
+  }
 }
