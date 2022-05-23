@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+.dashboard-card:hover{
+    background-color: #f0eafb;;
+}
+
 .dashboard-card h5{
     background-color: #4f1e9e;
 }

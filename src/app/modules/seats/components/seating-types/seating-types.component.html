@@ -9,6 +9,7 @@
                 <tr>
                     <th scope="col" class="text-nowrap">Id</th>
                     <th scope="col" class="text-nowrap">Seating Type</th>
+                    <th scope="col" class="text-nowrap">Seats Count</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <!-- <td><a [routerLink]="['/seating/show',seating?.id]">{{seating?.id}}</a></td> -->
                     <td> {{seating?.id}} </td>
                     <td class="text-nowrap"> {{ seating?.seating }} </td>
+                    <td class="text-nowrap"> {{ seating?.seatCount }} </td>
                 </tr>
             </tbody>
           </table>
