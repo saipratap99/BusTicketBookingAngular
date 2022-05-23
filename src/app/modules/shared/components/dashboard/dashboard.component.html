@@ -1,0 +1,92 @@
+<app-banner></app-banner>
+<h4 class="heading">
+    {{ authService.isAdmin() ? 'Admin' : operatorName }} Dashboard
+</h4>
+<div class="over-banner-wrapper">
+    <div class="over-banner border rounded p-3">
+        <div class="d-flex flex-wrap justify-content-md-between justify-content-center">
+            <!-- Bookings -->
+            <div class="dashboard-card shadow rounded-bottom" *ngIf="bookingStats">
+                <h5 class="p-3 text-light border rounded-top">All Bookings</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column p-3">
+                        <h1>{{ bookingStats?.totalCount }}</h1>    
+                        <p class="text-muted">Total</p>
+                    </div>
+                    <div class="d-flex flex-column p-3">
+                        <h6 class="text-end text-success">{{ bookingStats?.successCount }}</h6>
+                        <p class="text-small text-end text-success">Success</p>
+                        <h6 class="text-end text-danger">{{ bookingStats?.cancelledCount }}</h6>    
+                        <p class="text-small text-end text-danger">Cancelled</p>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Buses -->
+            <div class="dashboard-card shadow rounded-bottom" routerLink="/buses" *ngIf="busStats">
+                <h5 class="p-3 text-light border rounded-top">Buses</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column p-3">
+                        <h1>{{ busStats?.totalCount }}</h1>    
+                        <p class="text-muted">Total</p>
+                    </div>
+                    <div class="d-flex flex-column p-3">
+                        <h6 class="text-end text-success">{{ busStats?.runningCount }}</h6>
+                        <p class="text-small text-end text-success">Running</p>
+                        <h6 class="text-end text-danger">{{ busStats?.stoppedCount }}</h6>    
+                        <p class="text-small text-end text-danger">Stopped</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Services -->
+            <div class="dashboard-card shadow rounded-bottom" routerLink="/services" *ngIf="serviceStats">
+                <h5 class="p-3 text-light border rounded-top">Services</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column p-3">
+                        <h1>{{ serviceStats?.totalCount }}</h1>    
+                        <p class="text-muted">Total</p>
+                    </div>
+                    <div class="d-flex flex-column p-3">
+                        <h6 class="text-end text-success">{{ serviceStats?.runningCount }}</h6>
+                        <p class="text-small text-end text-success">Running</p>
+                        <h6 class="text-end text-danger">{{ serviceStats?.stoppedCount }}</h6>    
+                        <p class="text-small text-end text-danger">Stopped</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Schedules -->
+            <div class="dashboard-card shadow rounded-bottom" routerLink="/schedules" *ngIf="scheduleStats">
+                <h5 class="p-3 text-light border rounded-top">Schedules</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column p-3">
+                        <h1>{{ scheduleStats?.totalCount }}</h1>    
+                        <p class="text-muted">Total</p>
+                    </div>
+                    <div class="d-flex flex-column p-3">
+                        <h6 class="text-end text-success">{{ scheduleStats?.runningCount }}</h6>
+                        <p class="text-small text-end text-success">Running</p>
+                        <h6 class="text-end text-danger">{{ scheduleStats?.stoppedCount }}</h6>    
+                        <p class="text-small text-end text-danger">Stopped</p>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Users -->
+            <div class="dashboard-card shadow rounded-bottom" routerLink="/users" *ngIf="authService.isAdmin() && userStats">
+                <h5 class="p-3 text-light border rounded-top">Users</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column p-3">
+                        <h1>{{ userStats?.totalCount }}</h1>    
+                        <p class="text-muted">Total</p>
+                    </div>
+                    <div class="d-flex flex-column p-3">
+                        <h6 class="text-end text-success">{{ userStats?.customersCount }}</h6>
+                        <p class="text-small text-end text-success">Customers</p>
+                        <h6 class="text-end text-warning">{{ userStats?.operatorsCount }}</h6>    
+                        <p class="text-small text-end text-warning">Operators</p>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

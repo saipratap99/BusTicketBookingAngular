@@ -8,6 +8,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { BannerComponent } from './components/banner/banner.component';
 import { WeekDayPipe } from './pipes/week-day.pipe';
 import { globalVars } from './models/urls.model';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { globalVars } from './models/urls.model';
     NavbarComponent,
     ToastBarComponent,
     BannerComponent,
-    WeekDayPipe
+    WeekDayPipe,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

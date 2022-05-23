@@ -9,22 +9,10 @@
                 <a class="nav-link" [class.active]="currPage == 'Home'" aria-current="page" routerLink="/" (click)="setActive('Home')">Home</a>
             </li>
             <li class="nav-item" *ngIf="authService.isLoggedIn()">
-                <a class="nav-link" aria-current="page" routerLink="/bookings/" [class.active]="currPage == 'Bookings'" (click)="setActive('Bookings')">Bookings</a>
+                <a class="nav-link" aria-current="page" routerLink="/bookings/" [class.active]="currPage == 'Bookings'" (click)="setActive('Bookings')">My Bookings</a>
             </li>
             <li class="nav-item" *ngIf="authService.isOperatorOrAdmin()">
-                <a class="nav-link" aria-current="page" routerLink="/buses/" [class.active]="currPage == 'Buses'" (click)="setActive('Buses')">Buses</a>
-            </li>
-            <li class="nav-item" *ngIf="authService.isOperatorOrAdmin()">
-                <a class="nav-link" aria-current="page" routerLink="/seats/" [class.active]="currPage == 'Seats'" (click)="setActive('Seats')">Seating</a>
-            </li>
-            <li class="nav-item" *ngIf="authService.isOperatorOrAdmin()">
-                <a class="nav-link" aria-current="page" routerLink="/services/" [class.active]="currPage == 'Services'" (click)="setActive('Services')">Services</a>
-            </li>
-            <li class="nav-item" *ngIf="authService.isOperatorOrAdmin()">
-                <a class="nav-link" aria-current="page" routerLink="/schedules/" [class.active]="currPage == 'Schedules'" (click)="setActive('Schedules')">Schedules</a>
-            </li>
-            <li class="nav-item" *ngIf="authService.isAdmin()">
-                <a class="nav-link" aria-current="page" routerLink="/users/" [class.active]="currPage == 'Admin'" (click)="setActive('Admin')">Admin</a>
+                <a class="nav-link" aria-current="page" routerLink="/schedules/" [class.active]="currPage == 'Dashboard'" (click)="setActive('Dashboard')">Dashboard</a>
             </li>
             <li class="nav-item" *ngIf="authService.isLoggedIn()">
                 <button class="btn btn-light btn-sm" (click)="logOutUser()">Log out</button>

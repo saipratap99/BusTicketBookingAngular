@@ -1,0 +1,22 @@
+.heading{
+    text-align: center;
+    z-index: 10;
+    color: white;
+    margin-top: 20px;
+}
+
+.dashboard-card{
+    margin-left: 15px;
+    margin-bottom: 15px;
+    width: 300px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.dashboard-card h5{
+    background-color: #4f1e9e;
+}
+
+.row > * {
+    padding: 0;
+}

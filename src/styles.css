@@ -70,3 +70,7 @@ a.navbar-brand:hover{
     background-color: #643ba7d2;
     border: 1px solid #643ba7d2;
 }
+
+.text-small{
+    font-size: 12px;
+}
