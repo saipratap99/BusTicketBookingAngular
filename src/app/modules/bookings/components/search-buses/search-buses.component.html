@@ -9,6 +9,11 @@
 				  <option [value]="departureLocation.locationName" *ngFor="let departureLocation of departureLocations">
 			  </datalist>
 			</div>
+			<div class="col-md-auto col-9 text-center">
+				<button class="button" (click)="swapLocations()">
+					<fa-icon [icon]="swapIcon" class="swap-icon"></fa-icon>
+				</button>
+			</div>
 			<div class="col-md-auto col-9">
 			  <label class="visually-hidden" for="autoSizingInput">Arrival location</label>
 			  <input list="arrivalLocations" class="form-control" id="autoSizingInput" name="arrLocation" placeholder="Search Arrival location" formControlName="arrivalLocation" required autocomplete="off">

@@ -6,7 +6,7 @@ import { switchMap , filter} from 'rxjs/operators';
 import { BookingService } from '../../services/booking.service';
 import { Location } from '../../models/location.model';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
-
+import { faExchange } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-search-buses',
   templateUrl: './search-buses.component.html',
@@ -15,6 +15,7 @@ import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-com
 export class SearchBusesComponent implements OnInit {
 
   form!: FormGroup 
+  swapIcon = faExchange;
 
   @Input() selectedDepartureLocation!: Location
   @Input() selectedArrivalLocation!: Location
@@ -49,6 +50,14 @@ export class SearchBusesComponent implements OnInit {
       this.date = this.selectedDate
 
     }
+  }
+
+  swapLocations(){
+    let departureLocation = this.form.get('departureLocation')?.value;
+    let arrivalLocation = this.form.get('arrivalLocation')?.value;
+    console.log(departureLocation, arrivalLocation);
+    this.form.get('departureLocation')?.setValue(arrivalLocation);
+    this.form.get('arrivalLocation')?.setValue(departureLocation);
   }
 
   searchLocation() {
