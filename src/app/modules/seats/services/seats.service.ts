@@ -25,4 +25,13 @@ export class SeatsService {
   getAllSeatingTypes(){
     return this.http.get<any[]>(`${this.url}/seating-types/`);
   }
+
+  busDetailsRead(id?: number){
+    return this.http.get(`${this.url}/bus_details/${id}`);
+  }
+
+  scheduleDetailsRead(id: number){
+    return this.http.get(`${this.url}/schedule/${id}`);
+  }
+  
 }

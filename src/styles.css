@@ -78,3 +78,7 @@ a.navbar-brand:hover{
 tr:last-child{
     border-color: transparent;
 }
+
+.toast-bar{
+    z-index: 9;
+}

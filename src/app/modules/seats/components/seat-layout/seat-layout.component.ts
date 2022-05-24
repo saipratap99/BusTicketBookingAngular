@@ -21,13 +21,22 @@ export class SeatLayoutComponent implements OnInit {
   loading: boolean = false;
   availableSeats!: number;
 
+  busId!: number;
+  busDetails!: any;
+
+  scheduleId!: number;
+  scheduleDetails!: any;
+
   steering: any = faCircleDot 
   
   constructor(private route: ActivatedRoute, private seatService: SeatsService, private router: Router, private msgCommunicationService: MsgCommunicationService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.paramMap.subscribe(params => {
+      this.busId = Number(params.get('busId'));
+      this.scheduleId = Number(params.get('scheduleId'))
       this.fetchSeatsFromService();
+      this.getScheduleDetails();
     })
     
   }
@@ -126,5 +135,22 @@ export class SeatLayoutComponent implements OnInit {
     this.availableSeats = this.seats.reduce((prevValue, seat) => prevValue += seat.booked ? 0 : 1, 0);
   }
 
+  getBusDetails(){
+    this.seatService.busDetailsRead(this.busId).subscribe({
+      next: (data) => {
+        this.busDetails = data;
+        console.log(this.busDetails);
+      }
+    })
+  }
+
+  getScheduleDetails(){
+    this.seatService.scheduleDetailsRead(this.scheduleId).subscribe({
+      next: (data) => {
+        this.scheduleDetails = data;
+        console.log(this.scheduleDetails);
+      }
+    })
+  }
 }
 

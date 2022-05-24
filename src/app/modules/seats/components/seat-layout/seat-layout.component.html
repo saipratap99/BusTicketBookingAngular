@@ -52,13 +52,15 @@
     </div>
 
     <div class="text-center">
+        <div class="mt-2">
+            <div>Total Fare <strong> {{ scheduleDetails?.basePrice * seatsSelected.length | currency: 'INR' }}</strong></div>
+        </div>
         <button class="btn btn-primary mt-3 mx-2" (click)="onProceed()" [disabled]="loading">
             <span *ngIf="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             </span>
             {{ loading ? 'Booking..' : 'Proceed'}}
-        </button>    
-        
+        </button>
     </div>
 
 </div>
