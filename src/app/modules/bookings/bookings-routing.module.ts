@@ -9,6 +9,7 @@ import { SearchBusesComponent } from './components/search-buses/search-buses.com
 
 const routes: Routes = [
   { path: '', component: BookingDetailsComponent, canActivate: [AuthGuard]},
+  { path: 'all', component: BookingDetailsComponent, canActivate: [AuthGuard]},
   { path: 'search', component: SearchBusesComponent },
   { path: 'search/:depLocation/:depId/:arrLocation/:arrId/:date', component: AvailableBusesComponent },
   { path: 'confirm/:bookingId', component: ConfirmBookingComponent, canActivate: [AuthGuard]},

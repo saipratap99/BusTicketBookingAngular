@@ -14,7 +14,6 @@ import { MinutesToHhMmPipe } from './pipes/minutes-to-hh-mm.pipe';
 import { AddMinutesToDatePipe } from './pipes/add-minutes-to-date.pipe';
 import { SharedModule } from '../shared/shared.module';
 
-
 @NgModule({
   declarations: [
     SearchBusesComponent,

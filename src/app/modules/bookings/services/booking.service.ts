@@ -27,7 +27,12 @@ export class BookingService {
     return this.http.post(`${this.url}/booking/confirm/${id}`, {});
   }
 
-  getAllSuccessBookings(){
+  getAllMyBookings(){
     return this.http.get<any[]>(`${this.url}/booking/`);
+  }
+
+  getAllBookings(){
+    console.log("all")
+    return this.http.get<any[]>(`${this.url}/booking/all`);
   }
 }
