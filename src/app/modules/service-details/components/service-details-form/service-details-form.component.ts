@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { ServiceDetailsService } from '../../services/service-details.service';
 
@@ -19,7 +20,7 @@ export class ServiceDetailsFormComponent implements OnInit {
   @Input() serviceDetails: any;
   disabled: boolean = false;
 
-  constructor(private serviceDetailsService: ServiceDetailsService, private msgCommunicationService: MsgCommunicationService) { }
+  constructor(private serviceDetailsService: ServiceDetailsService, private msgCommunicationService: MsgCommunicationService, private router: Router) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -63,6 +64,7 @@ export class ServiceDetailsFormComponent implements OnInit {
           let action = this.type === 'create' ? 'added' : 'updated'
           this.msgCommunicationService.msgEvent.emit({msg: `Service details ${action} ${JSON.parse(JSON.stringify(data)).serviceName}`, status: 'success', show: true});
           this.serviceDetailsForm.reset();
+          this.router.navigate(['/services'])
         },
         error: (err) => {
           console.log(err);

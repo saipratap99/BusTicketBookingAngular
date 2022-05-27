@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { of } from 'rxjs';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
@@ -22,7 +23,7 @@ export class ScheduleFormComponent implements OnInit {
   @Input() schedule!: any;
   disabled: boolean = false;
 
-  constructor(private scheduleService: ScheduleService, private msgCommunicationService: MsgCommunicationService) { }
+  constructor(private scheduleService: ScheduleService, private msgCommunicationService: MsgCommunicationService, private router: Router) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -84,6 +85,7 @@ export class ScheduleFormComponent implements OnInit {
           let action = this.type === 'create' ? 'added' : 'updated'
           this.msgCommunicationService.msgEvent.emit({msg: `Schedule details ${action} ${JSON.parse(JSON.stringify(data)).id}`, status: 'success', show: true});
           this.scheduleDetailsForm.reset();
+          this.router.navigate(['/schedules'])
         },
         error: (err) => {
           console.log(err);

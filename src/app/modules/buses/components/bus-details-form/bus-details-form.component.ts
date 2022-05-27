@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { MsgCommunicationService } from 'src/app/modules/shared/services/msg-communication.service';
 import { BusService } from '../../services/bus.service';
@@ -21,7 +22,7 @@ export class BusDetailsFormComponent implements OnInit {
   @Input() id!: number
   disabled: boolean = false;
 
-  constructor(private busService: BusService, private msgCommunicationService: MsgCommunicationService) { }
+  constructor(private busService: BusService, private msgCommunicationService: MsgCommunicationService, private router: Router) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -68,6 +69,7 @@ export class BusDetailsFormComponent implements OnInit {
           let action = this.type === 'create' ? 'added' : 'updated'
           this.msgCommunicationService.msgEvent.emit({msg: `Bus details ${action} ${JSON.parse(JSON.stringify(data)).busName}`, status: 'success', show: true});
           this.busDetailsForm.reset();
+          this.router.navigate(['/buses'])
         },
         error: (err) => {
           console.log(err);

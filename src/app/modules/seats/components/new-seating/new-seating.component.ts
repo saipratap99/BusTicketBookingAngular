@@ -78,8 +78,8 @@ export class NewSeatingComponent implements OnInit {
           next: (data) => {
             console.log(data);
             this.msgCommunicationService.msgEvent.emit({ msg: JSON.parse(JSON.stringify(data))?.msg, status: "success", show: true })
-            this.router.navigate(['/seats/new']);
             this.loading = false
+            this.router.navigate(['/seats']);
           },
           error: (err) => {
             this.loading= false;
