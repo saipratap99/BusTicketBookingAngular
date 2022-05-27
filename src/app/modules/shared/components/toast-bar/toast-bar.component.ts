@@ -23,7 +23,7 @@ export class ToastBarComponent implements OnInit {
       this.status = toastBarMsg.status;
       setTimeout(() => {
         this.closeToastBar();
-      }, 5000);
+      }, 10000);
     })
 
     

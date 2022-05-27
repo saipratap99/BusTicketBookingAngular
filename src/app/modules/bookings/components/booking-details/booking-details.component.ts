@@ -62,7 +62,7 @@ export class BookingDetailsComponent implements OnInit {
   }
 
   sortByDeparture(){
-    this.allSuccessbookingDetails = this.allSallSuccessbookingDetailsResponse;
+    this.allSuccessbookingDetails.sort((booking1, booking2) => new Date(booking1.doj + " " + booking1.time).getTime() - new Date(booking2.doj + " " + booking2.time).getTime());
     if(this.sortStatus.isDepartureSortedInAsc)
       this.allSuccessbookingDetails.reverse();
     

@@ -47,6 +47,7 @@ export class SeatLayoutComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.seats = data;
+          console.log(this.seats)
           this.seperateSeatsByRows();
           this.getAvailableSeatCount();
         },
@@ -67,8 +68,9 @@ export class SeatLayoutComponent implements OnInit {
         this.seatsByRow.set(seat.seatRow,[]);
 
       // adds empty seat / object  
-      if(seat.seatCol != this.seatsByRow.get(seat.seatRow).length + 1)
+      while(seat.seatCol != this.seatsByRow.get(seat.seatRow).length + 1)
         this.seatsByRow.get(seat.seatRow).push({});
+      
       this.seatsByRow.get(seat.seatRow).push(seat);
     }
 

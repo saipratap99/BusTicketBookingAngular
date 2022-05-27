@@ -19,9 +19,12 @@
                     <input type="number" class="form-control" id="rows" name="cols" autocomplete="off" #colsInput>
                 </div>	
                 		      
-                <div class="col-lg-3 col-12 mb-3">
-                    <label for="cols" class="form-label invisible">Submit</label><br>
-                    <button type="submit" class="btn btn-primary" (click)="generateLayout(seating.value, rowsInput.value, colsInput.value)">Generate Layout</button>
+                <div class="col-lg-3 col-12 mb-3 d-flex flex-column">
+                    <div class="my-2">
+                        <input id="generate-seat-names" type="checkbox" class="mx-2"  #defaultSeatName>
+                        <label for="generate-seat-names">Generate Deafult Seat Names</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="generateLayout(seating.value, rowsInput.value, colsInput.value, defaultSeatName.checked)">Generate Layout</button>
                 </div>
             </div>
         </form>   

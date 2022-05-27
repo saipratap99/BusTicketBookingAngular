@@ -22,8 +22,11 @@ export class NewSeatingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  generateLayout(seating: string, rowsInput: string, colsInput: string){
+  generateLayout(seating: string, rowsInput: string, colsInput: string, generateDeafaultSeatName: boolean){
     
+    this.rows = []
+    this.cols = []
+
     this.seatingType = seating;
 
     let rows = Number(rowsInput);
@@ -39,15 +42,22 @@ export class NewSeatingComponent implements OnInit {
     
     if(rows >= 3 && cols >= 3){
       this.seats = new Map();
-
+      let prefix = 65;
       for(let i = 0; i < rows;  i++){
         this.seats.set(i, []);
+        let prefixChar = String.fromCharCode(prefix++)
+        let suffix = 1;
         for(let j = 0; j < cols; j++){
+          
+          let midCol = Math.floor(cols/2);
+
+          let seatName = generateDeafaultSeatName && j != midCol ? `${prefixChar}${suffix++}` : '';
           let seat = {
             row: i + 1,
             col: j + 1,
-            seatName: ''  
+            seatName: seatName
           }
+          
           this.seats.get(i).push(seat);
         }
       }
